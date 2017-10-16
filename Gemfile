@@ -12,7 +12,7 @@ group :production do
   # Use pg as the production database for Active Record
   gem 'pg'
   # Uncomment for Heroku
-  # gem 'rails_12factor'
+  gem 'rails_12factor'
 end
 
 # #2
@@ -65,3 +65,5 @@ gem 'better_errors'
 gem 'binding_of_caller'
 
 gem 'bootstrap-sass'
+
+gem 'devise'
