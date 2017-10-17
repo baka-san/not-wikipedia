@@ -15,7 +15,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 # Uncomment for Devise
-require 'rspec/rails'
+# require 'rspec/rails'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -42,8 +42,8 @@ RSpec.configure do |config|
   end
 
   # Uncomment for Devise
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :view
+  # config.include Devise::Test::ControllerHelpers, type: :controller
+  # config.include Devise::Test::ControllerHelpers, type: :view
   
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
