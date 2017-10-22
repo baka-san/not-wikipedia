@@ -67,3 +67,5 @@ gem 'binding_of_caller'
 gem 'bootstrap-sass'
 
 gem 'devise'
+
+gem 'faker'

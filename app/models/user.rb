@@ -6,10 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   after_create :skip_user_confirmation!
-
-
-
-
+  has_many :wikis, dependent: :destroy
 
   private 
     def skip_user_confirmation!
