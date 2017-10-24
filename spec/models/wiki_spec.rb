@@ -1,4 +1,6 @@
 require 'rails_helper'
+include RandomData
+
 
 RSpec.describe Wiki, type: :model do
   

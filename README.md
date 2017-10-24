@@ -1,4 +1,4 @@
-notWikipedia, notWiki for short, is like Wikipedia only it's not. (Write what notWiki has to offer here...)
+Like Wikipedia, only not.
 
 Things I need to talk about here:
 
