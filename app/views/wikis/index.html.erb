@@ -1,0 +1,19 @@
+<div class="row wiki-index">
+  
+  <div class="col-xs-12 col-md-8 vertical-bottom">
+    <div class="col-xs-8">
+      <h1>Wiki</h1>
+    </div>
+
+    <div class="col-xs-4 new-topic-button">
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success pull-right' %>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-md-8">
+    <%= render @wikis %>
+  </div>
+
+
+</div>

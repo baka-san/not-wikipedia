@@ -1,0 +1,15 @@
+<h1>Create a new wiki</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for wikis:</p>
+    <ul>
+      <li>Make sure the wiki doesn't already exist.</li>
+      <li>Never insult dogs.</li>
+      <li>Smile when you type.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { wiki: @wiki} %>
+  </div>
+</div>
