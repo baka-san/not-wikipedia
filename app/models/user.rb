@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  after_create :skip_user_confirmation!
   has_many :wikis, dependent: :destroy
+
+  before_save { self.role ||= :standard }
+  after_create :skip_user_confirmation!
+
+  enum role: [:standard, :premium, :admin]
 
   private 
     def skip_user_confirmation!

@@ -67,7 +67,7 @@ RSpec.describe WikisController, type: :controller do
 
   end  # End context guest
 
-  context "member user" do
+  context "standard user" do
 
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
