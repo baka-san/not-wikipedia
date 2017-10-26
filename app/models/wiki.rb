@@ -5,4 +5,9 @@ class Wiki < ApplicationRecord
   validates :body, length: {minimum: 1}, presence: true
   validates :user, presence: true
 
+
+  def private?
+    self.private
+  end
+
 end

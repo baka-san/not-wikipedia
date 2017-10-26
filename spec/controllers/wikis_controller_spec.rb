@@ -70,12 +70,12 @@ RSpec.describe WikisController, type: :controller do
   context "standard user" do
 
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+      # @request.env["devise.mapping"] = Devise.mappings[:user]
       # user2 = User.create!(email: "user1@gmail.com", password: "password", password_confirmation: "password")
       # sign_in user2
       # pp user2
-      @user = User.create!(email: "user@gmail.com", password: "password", password_confirmation: "password")
-      sign_in @user
+      # @user = User.create!(email: "user@gmail.com", password: "password", password_confirmation: "password")
+      sign_in user
       # sign_in :user, user
       # sign_in(:user, user)
       # sign_in(user, scope: :user)
@@ -83,6 +83,7 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET show" do
       it "returns http success" do
+        byebug
         get :show, params: { id: wiki.id }
         expect(response).to have_http_status(:success)
       end

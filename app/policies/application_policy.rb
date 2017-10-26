@@ -7,17 +7,16 @@ class ApplicationPolicy
   end
 
   def index?
-    false
-    # true
+    true
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    # scope.where(:id => record.id).exists?
+    true
   end
 
   def create?
     false
-    # user.present?
   end
 
   def new?
@@ -34,7 +33,6 @@ class ApplicationPolicy
 
   def destroy?
     false
-    # user.present?
   end
 
   def scope
