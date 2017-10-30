@@ -8,9 +8,11 @@
     <%= @wiki.body %>
   </div>
 
-  <div class="col-md-4 edit-delete">
-    <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to end this wiki\'s life?'} %>
-  </div>
+  <% if current_user %>
+    <div class="col-md-4 edit-delete">
+      <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+      <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to end this wiki\'s life?'} %>
+    </div>
+  <% end %>
 
 </div>

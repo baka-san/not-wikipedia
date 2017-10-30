@@ -7,12 +7,14 @@ require 'rails_helper'
 # Admin = Premium
 RSpec.describe WikiPolicy do
 
+  
   subject { WikiPolicy.new(user, article) }
 
   let(:user) { create(:user) }
-  let(:premium_user) { create(:user) }
+  let(:premium_user) { create(:user, role: 'premium') }
+  let(:admin) {create(:user, role: 'admin')}
   let(:wiki) { create(:wiki, user_id: user.id) }
-  let(:private_wiki) { create(:wiki, user_id: premium_user.id), private: true }
+  let(:private_wiki) { create(:wiki, user_id: premium_user.id, private: true) }
 
   # context "guest user" do
 
@@ -28,19 +30,19 @@ RSpec.describe WikiPolicy do
   #   it { should_not permit(:destroy) }
   # end
 
-  # context "standard user - own wiki" do
+  context "standard user - own wiki" do
 
-  #   before do     
-  #     sign_in user
-  #   end
+    # before do     
+    #   sign_in user
+    # end
 
-  #   it { should permit(:show)    }
-  #   it { should permit(:create)  }
-  #   it { should permit(:new)     }
-  #   it { should permit(:update)  }
-  #   it { should permit(:edit)    }
-  #   it { should permit(:destroy) }
-  # end
+    it { should permit(:show)    }
+    it { should permit(:create)  }
+    it { should permit(:new)     }
+    it { should permit(:update)  }
+    it { should permit(:edit)    }
+    it { should permit(:destroy) }
+  end
 
   # context "standard user - other user's wiki" do
 

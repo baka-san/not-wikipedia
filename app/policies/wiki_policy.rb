@@ -11,18 +11,32 @@ class WikiPolicy < ApplicationPolicy
     @wiki = wiki
   end
 
+  def show?
+    if @wiki.private?
+      @user == @wiki.user || @user.admin?
+    else
+      @user.present?
+    end
+  end
+
   def create?
-    if wiki.private?
-      user.premium? || user.admin?
+    if @wiki.private?
+      @user.premium? || @user.admin?
+    else
+      @user.present?
     end
   end 
 
   def new?
-    create?
-  end
+    if @wiki.private?
+      @user.premium? || @user.admin?
+    else
+      @user.present?
+    end
+  end 
 
   def update?
-    wiki.user == current_user || user.admin?
+    @wiki.user == @user || @user.admin?
   end
 
   def edit?
@@ -30,12 +44,12 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    wiki.user == current_user || user.admin?
+    @wiki.user == @user || @user.admin?
   end
 
   class Scope < Scope
     def resolve
-      if user && (user.admin? || user.premium?)
+      if @user && (@user.admin? || @user.premium?)
         scope.all
       else 
         scope.where(private: false)
