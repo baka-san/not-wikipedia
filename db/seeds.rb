@@ -1,7 +1,126 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+# # Create Users
+# 5.times do |i|
+#   User.create!(
+#     email:    "user#{i}@gmail.com",
+#     username: Faker::GameOfThrones.character,
+#     password: "password",
+#     password_confirmation: "password"
+#   )
+# end
+
+# Create Grant/admin
+grant = User.create!(
+  username: 'Grant',
+  email: 'gsbackes@gmail.com', 
+  password: 'password',
+  password_confirmation: "password",
+  role: 'admin'
+)
+
+# Create an admin user
+admin = User.create!(
+  email:    "admin@gmail.com",
+  username: "Admin",
+  password: "password",
+  password_confirmation: "password",
+  role: "admin"
+)
+
+require 'random_data'
+
+# Create a premium user
+premium_user = User.create!(
+  email:    "premiumuser@gmail.com",
+  username: "Premium User",
+  password: "password",
+  password_confirmation: "password",
+  role: "premium"
+)
+
+# Create a premium user
+standard_user = User.create!(
+  email:    "standarduser@gmail.com",
+  username: "Standard User",
+  password: "password",
+  password_confirmation: "password"
+)
+
+users = User.all
+
+#Create Private Wiki Pages
+Wiki.create!(
+    title: "Admin's Private Wiki",
+    body: "This wiki page is for Admin only.",
+    user: admin,
+    private: true
+)
+
+Wiki.create!(
+    title: "Premium User's Private Wiki",
+    body: "This is Premium User's wiki. Stay out!",
+    user: premium_user,
+    private: true
+)
+
+# Create Harry Potter Wiki Pages
+6.times do
+  sentence = Proc.new { Faker::HarryPotter.quote }
+
+  Wiki.create!(
+      title: Faker::HarryPotter.unique.book,
+      body: RandomData.random_body(sentence),
+      user_id: users.sample.id
+    )
+end
+
+#Create Rick and Morty Wiki Pages
+3.times do
+  sentence = Proc.new { Faker::RickAndMorty.quote }
+
+  Wiki.create!(
+      title: Faker::RickAndMorty.unique.character,
+      body: RandomData.random_body(sentence),
+      user_id: users.sample.id
+    )
+end
+
+#Create Star Wars Wiki Pages
+3.times do
+  sentence = Proc.new { Faker::StarWars.quote }
+
+  Wiki.create!(
+      title: Faker::StarWars.unique.character,
+      body: RandomData.random_body(sentence),
+      user_id: users.sample.id
+    )
+end
+
+#Create Family Guy Wiki Pages
+3.times do
+  sentence = Proc.new { Faker::FamilyGuy.quote }
+
+  Wiki.create!(
+      title: Faker::FamilyGuy.unique.character,
+      body: RandomData.random_body(sentence),
+      user_id: users.sample.id
+    )
+end
+
+#Create Simpsons Wiki Pages
+3.times do
+  sentence = Proc.new { Faker::Simpsons.quote }
+
+  Wiki.create!(
+      title: Faker::Simpsons.unique.character,
+      body: RandomData.random_body(sentence),
+      user_id: users.sample.id
+    )
+end
+
+
+puts "Seed finished"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"
+

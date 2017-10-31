@@ -7,49 +7,51 @@ class WikiPolicy < ApplicationPolicy
   # Admin = everything
 
   def initialize(user, wiki)
+    # raise Pundit::NotAuthorizedError, "must be logged in" unless user
     @user = user
     @wiki = wiki
   end
 
   def show?
     if @wiki.private?
-      @user == @wiki.user || @user.admin?
+      # raise Pundit::NotAuthorizedError, "must be logged in" unless @user
+      authorized_for_this_private_wiki?
     else
-      @user.present?
+      true
     end
   end
 
   def create?
     if @wiki.private?
-      @user.premium? || @user.admin?
-    else
-      @user.present?
-    end
-  end 
-
-  def new?
-    if @wiki.private?
-      @user.premium? || @user.admin?
+      authorized_for_this_private_wiki?
     else
       @user.present?
     end
   end 
 
   def update?
-    @wiki.user == @user || @user.admin?
-  end
-
-  def edit?
-    update?
+    if @wiki.private?
+      authorized_for_this_private_wiki?
+    else
+      @user.present?
+    end
   end
 
   def destroy?
-    @wiki.user == @user || @user.admin?
+    if @wiki.private?
+      authorized_for_this_private_wiki?
+    else
+      @user.present?
+    end
+  end
+
+  def authorized_for_this_private_wiki?
+    @user && (@user.premium? || @user.admin?)
   end
 
   class Scope < Scope
     def resolve
-      if @user && (@user.admin? || @user.premium?)
+      if @user && (@user.premium? || @user.admin?)
         scope.all
       else 
         scope.where(private: false)

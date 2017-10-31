@@ -12,6 +12,10 @@ class User < ApplicationRecord
 
   enum role: [:standard, :premium, :admin]
 
+  # def authorized_for_this_private_wiki?(wiki)
+  #   self && (self == wiki.user || self.admin?)
+  # end
+
   private 
     def skip_user_confirmation!
       self.confirm if Rails.env.development?

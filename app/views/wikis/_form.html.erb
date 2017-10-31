@@ -20,12 +20,12 @@
     <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Describe the wiki" %>
   <% end %>
 
-  <% if authorized_for_private_wikis? %>
+  <% # if authorized_for_private_wikis? %>
     <div class="form-inline">
       <%= f.label :private, "Private"%>
       <%= f.check_box :private, class: 'remember-checkbox' %>
     </div>
-  <% end %>
+  <% # end %>
   
   <div class="form-group">
     <%= f.submit "Save", class: 'btn btn-success' %>
