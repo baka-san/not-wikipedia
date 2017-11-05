@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   private 
     def skip_user_confirmation!
-      self.confirm if Rails.env.development?
+      self.confirm if Rails.env.development? || Rails.env.test?
     end
 
 end

@@ -17,7 +17,6 @@
 # Uncomment for Devise
 # require 'rspec/rails'
 
-require "pundit/rspec"
 
 
 RSpec.configure do |config|

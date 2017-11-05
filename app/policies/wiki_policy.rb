@@ -46,15 +46,15 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def authorized_for_this_private_wiki?
-    @user && (@user.premium? || @user.admin?)
+    @user && (@user == @wiki.user || @user.admin?)
   end
 
   class Scope < Scope
     def resolve
-      if @user && (@user.premium? || @user.admin?)
+      if user && user.admin?
         scope.all
-      else 
-        scope.where(private: false)
+      else
+        scope.where(private: false).or(scope.where(user: user))
       end
     end
   end

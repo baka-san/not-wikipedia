@@ -5,81 +5,35 @@ require 'rails_helper'
 # Standard     x      x     x       x      x      x        x
 # Premium      x      x     x       x      x      x        x           x
 # Admin = Premium
-RSpec.describe WikiPolicy do
 
-  
-  subject { WikiPolicy.new(user, article) }
+RSpec.describe WikiPolicy do
 
   let(:user) { create(:user) }
   let(:premium_user) { create(:user, role: 'premium') }
   let(:admin) {create(:user, role: 'admin')}
   let(:wiki) { create(:wiki, user_id: user.id) }
   let(:private_wiki) { create(:wiki, user_id: premium_user.id, private: true) }
+  let(:private_wiki_admin) { create(:wiki, user_id: admin.id, private: true) }
 
-  # context "guest user" do
+  subject { WikiPolicy }
 
-  #   before do  
-  #     current_user = nil
-  #   end
+  permissions :show?, :new?, :create?, :edit?, :update?, :destroy? do
 
-  #   it { should     permit(:show)    }
-  #   it { should_not permit(:create)  }
-  #   it { should_not permit(:new)     }
-  #   it { should_not permit(:update)  }
-  #   it { should_not permit(:edit)    }
-  #   it { should_not permit(:destroy) }
-  # end
+    it "allows :show?, :new?, :create?, :edit?, :update?, :destroy? to all users for any public wiki" do
+      expect(subject).to permit(user, wiki)
+      expect(subject).to permit(premium_user, wiki)
+      expect(subject).to permit(admin, wiki)
+    end
 
-  context "standard user - own wiki" do
+    it "allows :show?, :new?, :create?, :edit?, :update?, :destroy? to admins and owners of a private wiki" do
+      expect(subject).to permit(premium_user, private_wiki)
+      expect(subject).to permit(admin, private_wiki)
+    end
 
-    # before do     
-    #   sign_in user
-    # end
-
-    it { should permit(:show)    }
-    it { should permit(:create)  }
-    it { should permit(:new)     }
-    it { should permit(:update)  }
-    it { should permit(:edit)    }
-    it { should permit(:destroy) }
+    it "denies :show?, :new?, :create?, :edit?, :update?, :destroy? to standard users and non-owners if private wiki" do
+      expect(subject).not_to permit(premium_user, private_wiki_admin)
+      expect(subject).not_to permit(user, private_wiki)
+    end
   end
 
-  # context "standard user - other user's wiki" do
-
-  #   before do  
-  #     let(:user) { create(:user) }
-  #     let(:other_user) { create(:user) }
-  #     let(:wiki) { create(:wiki, user_id: other_user.id) }
-      
-  #     sign_in user
-  #   end
-
-  #   it { should permit(:show)    }
-  #   it { should permit(:create)  }
-  #   it { should permit(:new)     }
-  #   it { should permit(:update)  }
-  #   it { should permit(:edit)    }
-  #   it { should permit(:destroy) }
-  # end
-
-
-  # permissions ".scope" do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :show? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :create? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :update? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :destroy? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
 end
