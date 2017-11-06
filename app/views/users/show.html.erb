@@ -1,0 +1,11 @@
+<h1><%= @user.username %>'s Profile</h1>
+<p>Last signed in at: <%= @user.last_sign_in_at %></p>
+<p>Member since: <%= @user.confirmed_at %></p>
+<p>Membership: <%= @user.role %></p>
+
+<% if @user == current_user %>
+  <div class="col-md-4 upgrade-downgrade">
+    <%= link_to "Upgrade Account", user_upgrade_path(current_user), class: 'btn btn-error', method: :post %>
+    <%= link_to "Downgrade Account", user_downgrade_path(current_user), class: 'btn btn-error', method: :post %>
+  </div>
+<% end %>
