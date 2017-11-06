@@ -73,3 +73,7 @@ gem 'faker'
 gem 'pundit'
 
 gem 'byebug'
+
+gem 'stripe'
+
+gem 'figaro'
