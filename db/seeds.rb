@@ -1,14 +1,19 @@
 require 'faker'
 
-# # Create Users
-# 5.times do |i|
-#   User.create!(
-#     email:    "user#{i}@gmail.com",
-#     username: Faker::GameOfThrones.character,
-#     password: "password",
-#     password_confirmation: "password"
-#   )
-# end
+# Create Plans
+plan = Stripe::Plan.retrieve(id: 'premium')
+
+unless plan
+  plan = Stripe::Plan.create(
+    :amount => 1500,
+    :interval => 'month',
+    :name => 'premium',
+    :currency => 'usd',
+    :id => 'premium'
+  )
+end
+
+Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
 
 # Create Grant/admin
 grant = User.create!(
@@ -121,6 +126,7 @@ end
 
 
 puts "Seed finished"
+puts "#{Plan.count} plans created"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
 
