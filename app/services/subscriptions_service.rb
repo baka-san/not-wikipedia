@@ -1,6 +1,6 @@
 require 'stripe'
 
-class ChargesService
+class SubscriptionsService
   # PLAN = Plan.find_by_name('premium')
 
   # DEFAULT_CURRENCY = 'usd'
@@ -13,7 +13,7 @@ class ChargesService
 
 
   def call
-    create_charge(find_customer)
+    create_subscription(find_customer)
   end
 
   private
@@ -36,13 +36,16 @@ class ChargesService
     def create_customer
       customer = Stripe::Customer.create(
         email: @email,
+        
         source: @token
       )
       @user.update(stripe_customer_id: customer.id)
-      return customer
+      customer
     end
 
-    def create_charge(customer)
+    # rename to create subscription
+    # rename controller to subscription
+    def create_subscription(customer)
       Stripe::Charge.create(
         customer: customer.id,
         amount: 1500,

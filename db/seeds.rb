@@ -1,19 +1,19 @@
 require 'faker'
 
-# Create Plans
-plan = Stripe::Plan.retrieve(id: 'premium')
+# # Create Plans
+# plan = Stripe::Plan.retrieve(id: 'premium')
 
-unless plan
-  plan = Stripe::Plan.create(
-    :amount => 1500,
-    :interval => 'month',
-    :name => 'premium',
-    :currency => 'usd',
-    :id => 'premium'
-  )
-end
+# unless plan
+#   plan = Stripe::Plan.create(
+#     :amount => 1500,
+#     :interval => 'month',
+#     :name => 'premium',
+#     :currency => 'usd',
+#     :id => 'premium'
+#   )
+# end
 
-Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
+# Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
 
 # Create Grant/admin
 grant = User.create!(

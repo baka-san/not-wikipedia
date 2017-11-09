@@ -38,10 +38,10 @@ RSpec.describe ChargesController, type: :controller do
       expect(response).to have_http_status(:redirect)
     end
   
-    it "creates a new charge" do
+    it "creates a new subscription" do
       expect{
         post :create, params: { stripeToken: stripeToken, stripeEmail: user.email }
-      }.to change(Charge, :count).by(1)
+      }.to change(Subscription, :count).by(1)
     end
   end
 

@@ -39,8 +39,8 @@ The source code is available at GitHub: https://github.com/baka-san/not-wikipedi
 
 **To run Not Wikipedia locally:**
 
-+ Clone the repository
-+ Run bundle install
++ [Clone the repository](https://help.github.com/articles/cloning-a-repository/)
++ Run `bundle install` on command line
 + Create and migrate the SQLite database with `rake db:create` and `rake db:migrate`
 + Start the server using `rails server`
 + Run the app on `localhost:3000`
