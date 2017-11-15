@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :wikis, dependent: :destroy
+  has_one :subscription, dependent: :destroy
 
   before_save { self.role ||= :standard }
   after_create :skip_user_confirmation!
@@ -15,6 +16,22 @@ class User < ApplicationRecord
   # def authorized_for_this_private_wiki?(wiki)
   #   self && (self == wiki.user || self.admin?)
   # end
+
+  def upgraded_account?
+    self.premium? || self.admin?
+  end
+
+  def downgrade_to_standard
+    self.role = "standard"
+  end
+
+  def upgrade_to_premium
+    self.role = "premium"
+  end
+
+  def upgrade_to_admin
+    self.role = "admin"
+  end
 
   private 
     def skip_user_confirmation!

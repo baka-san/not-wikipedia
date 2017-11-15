@@ -126,7 +126,7 @@ end
 
 
 puts "Seed finished"
-puts "#{Plan.count} plans created"
+# puts "#{Plan.count} plans created"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
 

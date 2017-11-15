@@ -1,6 +1,6 @@
  <h4>Sign up for a premium account using our super-secure checkout! Click the button below and enter your credit card info. No credit card information will be stored on the site.</h4>
 
-<%= form_tag charges_path do %>
+<%= form_tag subscriptions_path do %>
   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
     data-key="<%= @stripe_btn_data[:key] %>" 
     data-amount="<%= @stripe_btn_data[:amount] %>" 
