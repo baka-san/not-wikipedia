@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'stripe/webhooks'
 
   get 'welcome/about'
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     post '/downgrade_account' => 'users#downgrade_account', as: :downgrade
     post '/upgrade_account' => 'users#upgrade_account', as: :upgrade
+    get 'user_settings' => 'user_settings#show'
   end
 
   post '/stripe/webhooks', to: "subscriptions#webhooks"

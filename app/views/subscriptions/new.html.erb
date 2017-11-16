@@ -8,3 +8,38 @@
     data-email="<%= @stripe_btn_data[:email] %>" >
    </script>
 <% end %>
+
+
+
+
+<%= form_for @subscription do |f| %>
+  <% if @subscription.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+      <ul>
+      <% @subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag :card_number, "Credit Card Number " %>
+    <%= text_field_tag :card_number, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_cvc, "Security Code on Card (CVV)" %>
+    <%= text_field_tag :card_cvc, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_month, "Card Expiration" %>
+    <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_expiry_month"}%>
+    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_expiry_year"}%>
+  </div>
+  <div class="actions"><%= f.submit "Subscribe" %></div>
+
+  <%= hidden_field_tag 'stripeEmail', @stripe_btn_data[:email] %>
+<% end %>
+
+

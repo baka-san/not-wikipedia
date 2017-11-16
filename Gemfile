@@ -76,6 +76,8 @@ gem 'byebug'
 
 gem 'stripe'
 
+gem 'stripe_event'
+
 gem 'figaro'
 
 gem 'stripe-ruby-mock', '~> 2.5.0', :require => 'stripe_mock'

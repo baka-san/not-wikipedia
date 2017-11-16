@@ -65,7 +65,6 @@ class SubscriptionsService
     end
 
     def create_subscription(customer)
-
       # Create subscription in Stripe for the current_user
       subscription = Stripe::Subscription.create(
         customer: customer.id,

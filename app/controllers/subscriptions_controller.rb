@@ -6,12 +6,14 @@ class SubscriptionsController < ApplicationController
     # get rid of plans model, do it on stripe
     # search docs
     @plan = Stripe::Plan.retrieve(id: 'premium')
+    @subscription = Subscription.new
+
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
-      description: "Premium Membership",
-      amount: @plan.amount,
+      description: current_user.email,
+      amount: @plan.amount/100,
+      plan: @plan.id,
       email: current_user.email
-      # plan: @plan
     }
   end
 
