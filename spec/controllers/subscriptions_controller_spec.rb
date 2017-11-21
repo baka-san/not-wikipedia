@@ -1,7 +1,12 @@
 require 'rails_helper'
+require 'stripe_mock'
 
-RSpec.describe ChargesController, type: :controller do
+RSpec.describe SubscriptionsController, type: :controller do
 
+  let(:stripe_helper) { StripeMock.create_test_helper }
+  before { StripeMock.start }
+  after { StripeMock.stop }
+  
   let(:user) { create(:user) }
 
   describe "GET new" do
