@@ -1,7 +1,7 @@
 class AddColumnsToUser < ActiveRecord::Migration[5.1]
   def change
     change_table :users do |t|
-      t.string :stripe_customer_id
+      t.string :stripe_customer_id, unique: true
       t.datetime :subscribed_at
       t.datetime :subscription_expires_at
     end
