@@ -8,5 +8,6 @@ class AddColumnsToUser < ActiveRecord::Migration[5.1]
 
     add_index :users, :subscribed_at, name: "subscribed_at_for_users"
     add_index :users, :subscription_expires_at, name: "expiring_subscritions_on_users"
+    add_index :users, :stripe_customer_id, unique: true
   end
 end
