@@ -16,41 +16,49 @@ require 'faker'
 # Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
 
 # Create Grant/admin
-grant = User.create!(
+grant = User.new(
   username: 'Grant',
   email: 'gsbackes@gmail.com', 
   password: 'password',
   password_confirmation: "password",
   role: 'admin'
 )
+grant.skip_confirmation!
+grant.save!
 
 # Create an admin user
-admin = User.create!(
+admin = User.new(
   email:    "admin@gmail.com",
   username: "Admin",
   password: "password",
   password_confirmation: "password",
   role: "admin"
 )
+admin.skip_confirmation!
+admin.save!
 
 require 'random_data'
 
 # Create a premium user
-premium_user = User.create!(
+premium_user = User.new(
   email:    "premiumuser@gmail.com",
   username: "Premium User",
   password: "password",
   password_confirmation: "password",
   role: "premium"
 )
+premium_user.skip_confirmation!
+premium_user.save!
 
 # Create a premium user
-standard_user = User.create!(
+standard_user = User.new(
   email:    "standarduser@gmail.com",
   username: "Standard User",
   password: "password",
   password_confirmation: "password"
 )
+standard_user.skip_confirmation!
+standard_user.save!
 
 users = User.all
 
