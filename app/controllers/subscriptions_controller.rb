@@ -1,6 +1,5 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  protect_from_forgery :except => :webhooks
 
   def new
     # @plan = Stripe::Plan.retrieve(id: 'premium')

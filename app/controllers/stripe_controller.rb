@@ -1,4 +1,5 @@
 class StripeController < ApplicationController
+  protect_from_forgery :except => :webhooks
 
   def webhooks
     begin
@@ -8,16 +9,13 @@ class StripeController < ApplicationController
       case event_json['type']
         when 'invoice.payment_succeeded'
           # Update subscription in ActiveRecord
-          # Which date is best to use?
           # Move this to a model or service?
-          customer = User.where(stripe_customer_id: event_object.customer).first
+          customer = User.where(stripe_customer_id: event_object['customer']).first
           subscription = customer.subscription
 
           if subscription
             subscription.current_period_start = date.today.to_datetime.to_i
-            # subscription.current_period_end
             subscription.current_period_end = date.today.to_datetime.to_i + 1.month.to_i 
-            # subscription.current_period_start + 1.month.to_i
             subscription.save
           end
 
@@ -45,9 +43,23 @@ class StripeController < ApplicationController
 
         # when 'customer.subscription.updated'
           # handle event
-
       end
-    rescue Exception => ex
+
+    # Handle errors https://stripe.com/docs/api?lang=ruby#errors
+    rescue Stripe::CardError => e
+      # Since it's a decline, Stripe::CardError will be caught
+      body = e.json_body
+      err  = body[:error]
+
+      puts "Status is: #{e.http_status}"
+      puts "Type is: #{err[:type]}"
+      puts "Charge ID is: #{err[:charge]}"
+      # The following fields are optional
+      puts "Code is: #{err[:code]}" if err[:code]
+      puts "Decline code is: #{err[:decline_code]}" if err[:decline_code]
+      puts "Param is: #{err[:param]}" if err[:param]
+      puts "Message is: #{err[:message]}" if err[:message]
+    rescue => e
       render :json => {:status => 422, :error => "Webhook call failed"}
       return
     end
@@ -55,5 +67,3 @@ class StripeController < ApplicationController
   end
 
 end
-
-

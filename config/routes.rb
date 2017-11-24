@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     get 'user_settings' => 'user_settings#show'
   end
 
-  post '/stripe/webhooks', to: "subscriptions#webhooks"
+  post '/stripe/webhooks', to: "stripe#webhooks"
 
 end
