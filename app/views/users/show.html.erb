@@ -4,8 +4,22 @@
 <p>Membership: <%= @user.role %></p>
 
 <% if @user == current_user %>
-  <div class="col-md-4 upgrade-downgrade">
-    <%= link_to "Upgrade Account", user_upgrade_path(current_user), class: 'btn btn-error', method: :post %>
-    <%= link_to "Downgrade Account", user_downgrade_path(current_user), class: 'btn btn-error', method: :post %>
-  </div>
+
+  <% if @user.premium? %>
+    <div class="col-md-4 upgrade-downgrade">
+      <% if @user.subscription.autopay %>
+        <%= link_to "Turn off autopay", :turn_off_autopay, class: 'btn btn-error', method: :post %>
+      <% else %>
+        <%= link_to "Turn on autopay", :turn_on_autopay, class: 'btn btn-error', method: :post %>
+      <% end %>
+    </div>
+
+    <!-- put credit card info here or put a LINK TO SUBSCRIPTIONS/UPDATE -->
+
+  <% elsif @user.standard? %>
+    <div class="col-md-4 upgrade-downgrade">
+      <%= link_to "Upgrade Account", new_subscription_path, class: 'btn btn-error' %>
+    </div>    
+  <% end %>
+
 <% end %>

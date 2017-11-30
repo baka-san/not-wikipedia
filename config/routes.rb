@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :subscriptions, only: [:new, :create]
 
+  post '/turn_on_autopay' => 'subscriptions#turn_on_autopay', as: :turn_on_autopay
+  post '/turn_off_autopay' => 'subscriptions#turn_off_autopay', as: :turn_off_autopay
+
+
   resources :users, only: [] do
-    post '/downgrade_account' => 'users#downgrade_account', as: :downgrade
     post '/upgrade_account' => 'users#upgrade_account', as: :upgrade
     get 'user_settings' => 'user_settings#show'
   end

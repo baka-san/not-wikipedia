@@ -1,15 +1,30 @@
 class Subscription < ApplicationRecord
   belongs_to :user
 
-  def turn_on_autorenewal
-    # customer = Stripe::Customer.retrieve(self.user.stripe_customer_id)
+  def turn_on_autopay
+    # byebug
     sub = Stripe::Subscription.retrieve(stripe_subscription_id)
-    sub.cancel_at_period_end = false
+
+    item_id = sub.items.data[0].id
+    items = [{
+      id: item_id,
+      plan: "premium"
+    }]
+
+    sub.items = items
+    sub.save
+
+    self.autopay = true
+    self.save
   end
 
-  def turn_off_autorenewal
+  def turn_off_autopay
+    # byebug
     sub = Stripe::Subscription.retrieve(stripe_subscription_id)
-    sub.cancel_at_period_end = true
+    sub.delete(at_period_end: true)
+
+    self.autopay = false
+    self.save
   end
   
 end

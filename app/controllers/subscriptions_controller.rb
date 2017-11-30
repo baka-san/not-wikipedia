@@ -49,6 +49,32 @@ class SubscriptionsController < ApplicationController
 
   end
 
+  def turn_on_autopay
+    if current_user.role != "premium"
+      flash[:alert] = "You aren't a premium member!"
+      redirect_back(fallback_location: root_path)
+    else
+      subscription = current_user.subscription
+      subscription.turn_on_autopay
+
+      flash[:notice] = "You're successfully set up to give us more money. Thanks for the cash!"
+      redirect_to current_user
+    end
+  end
+
+  def turn_off_autopay
+    if current_user.role != "premium"
+      flash[:alert] = "You aren't a premium member!"
+      redirect_back(fallback_location: root_path)
+    else
+      subscription = current_user.subscription
+      subscription.turn_off_autopay
+
+      flash[:notice] = "Your account will be downgraded on #{subscription.current_period_end}. Goodbye mere standard user"
+      redirect_to current_user
+    end
+  end
+
   private
 
     def subscriptions_params

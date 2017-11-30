@@ -20,14 +20,18 @@
     <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Describe the wiki" %>
   <% end %>
 
-  <% # if authorized_for_private_wikis? %>
-    <div class="form-inline">
-      <%= f.label :private, "Private"%>
-      <%= f.check_box :private, class: 'remember-checkbox' %>
+  <% if current_user.admin? || current_user.premium? %>
+    <div class="form-group">
+      <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private %> Private wiki
+      <% end %>
     </div>
-  <% # end %>
+  <% else %>
+    <p>This will be a public wiki.</p>
+  <% end %>
   
   <div class="form-group">
     <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
+
 <% end %>

@@ -1,30 +1,28 @@
 require 'faker'
 
-# # Create Plans
-# plan = Stripe::Plan.retrieve(id: 'premium')
+# REMEMBER TO DELETE STRIPE TEST DATA AT https://dashboard.stripe.com/account/data
 
-# unless plan
-#   plan = Stripe::Plan.create(
-#     :amount => 1500,
-#     :interval => 'month',
-#     :name => 'premium',
-#     :currency => 'usd',
-#     :id => 'premium'
-#   )
-# end
+# Create Plans
+plan = Stripe::Plan.create(
+  :amount => 1500,
+  :interval => 'month',
+  :name => 'premium',
+  :currency => 'usd',
+  :id => 'premium'
+)
 
 # Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
 
-# Create Grant/admin
-grant = User.new(
-  username: 'Grant',
-  email: 'gsbackes@gmail.com', 
-  password: 'password',
-  password_confirmation: "password",
-  role: 'admin'
-)
-grant.skip_confirmation!
-grant.save!
+# # Create Grant/admin
+# grant = User.new(
+#   username: 'Grant',
+#   email: 'gsbackes@gmail.com', 
+#   password: 'password',
+#   password_confirmation: "password",
+#   role: 'admin'
+# )
+# grant.skip_confirmation!
+# grant.save!
 
 # Create an admin user
 admin = User.new(
@@ -61,6 +59,118 @@ standard_user.skip_confirmation!
 standard_user.save!
 
 users = User.all
+
+
+#Create Subscriptions
+
+# # Create Grant/admin subscription
+# token = Stripe::Token.create(
+#   :card => {
+#     :number => "4242424242424242",
+#     :exp_month => 12,
+#     :exp_year => 2050,
+#     :cvc => "123"
+#   },
+# )
+
+# customer = Stripe::Customer.create(
+#   email: grant.email,
+#   description: grant.email,
+#   source: token
+# )
+
+# grant.update(stripe_customer_id: customer.id)
+
+# subscription = Stripe::Subscription.create(
+#   customer: customer.id,
+#   :items => [
+#     {
+#       :plan => "premium"
+#     },
+#   ]
+# )
+
+# # Update ActiveRecord
+# sub = Subscription.create!(
+#   user_id: grant.id, 
+#   stripe_subscription_id: subscription.id,
+#   current_period_start: subscription.current_period_start,
+#   current_period_end: subscription.current_period_end
+# )
+
+# Create admin's subscription
+token = Stripe::Token.create(
+  :card => {
+    :number => "4242424242424242",
+    :exp_month => 12,
+    :exp_year => 2050,
+    :cvc => "123"
+  },
+)
+
+customer = Stripe::Customer.create(
+  email: admin.email,
+  description: admin.email,
+  source: token
+)
+
+admin.update(stripe_customer_id: customer.id)
+
+subscription = Stripe::Subscription.create(
+  customer: customer.id,
+  :items => [
+    {
+      :plan => "premium"
+    },
+  ]
+)
+
+# Update ActiveRecord
+sub = Subscription.create!(
+  user_id: admin.id, 
+  stripe_subscription_id: subscription.id,
+  current_period_start: subscription.current_period_start,
+  current_period_end: subscription.current_period_end
+)
+
+
+# Create premium user's subscription
+token = Stripe::Token.create(
+  :card => {
+    :number => "4242424242424242",
+    :exp_month => 12,
+    :exp_year => 2050,
+    :cvc => "123"
+  },
+)
+
+customer = Stripe::Customer.create(
+  email: premium_user.email,
+  description: premium_user.email,
+  source: token
+)
+
+premium_user.update(stripe_customer_id: customer.id)
+
+subscription = Stripe::Subscription.create(
+  customer: customer.id,
+  :items => [
+    {
+      :plan => "premium"
+    },
+  ]
+)
+
+# Update ActiveRecord
+sub = Subscription.create!(
+  user_id: premium_user.id, 
+  stripe_subscription_id: subscription.id,
+  current_period_start: subscription.current_period_start,
+  current_period_end: subscription.current_period_end
+)
+
+
+
 
 #Create Private Wiki Pages
 Wiki.create!(
@@ -135,6 +245,7 @@ end
 
 puts "Seed finished"
 # puts "#{Plan.count} plans created"
+puts "#{Subscription.count} subscriptions created"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
 
