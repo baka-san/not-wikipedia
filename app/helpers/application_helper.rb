@@ -4,4 +4,9 @@ module ApplicationHelper
     css_class << ' has-error' if errors.any?
     content_tag :div, capture(&block), class: css_class
   end
+
+  def display_date(datetime)
+    Time.at(datetime).strftime("%m/%d/%Y")
+  end
+
 end

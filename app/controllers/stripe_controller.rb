@@ -33,13 +33,20 @@ class StripeController < ApplicationController
 
 
         when 'customer.subscription.deleted'
+          # Find the customer from ActiveRecord
           customer = User.where(stripe_customer_id: event_object.customer).first
           subscription = customer.subscription
 
+          # Delete the subscription from ActiveRecord
           if subscription
             subscription.destroy
             subscription.save
           end
+
+          # Make user's private wiki's public
+          private_wikis = customer.wikis.where(private: true)
+          private_wikis.update_all(private: false)
+
 
         # when 'customer.subscription.updated'
           # handle event
