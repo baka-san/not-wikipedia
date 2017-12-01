@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
   include WikisHelper
+  include MarkdownHelper
 
   # before_action :set_last_seen_at, 
   #   if: proc { user_signed_in? && (User[:last_sign_in_at] == nil || User[:last_sign_in_at] < 15.minutes.ago) }

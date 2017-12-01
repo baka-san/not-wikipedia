@@ -1,11 +1,11 @@
 <div class="row wikis-show">
 
-  <h4 class="media-heading wiki-title"w>
+  <h4 class="media-heading wiki-title">
     <strong><%= @wiki.title %></strong>
   </h4>
 
   <div class="col-xs-12 col-md-8 wiki-info">
-    <%= simple_format(@wiki.body) %>
+    <%= markdown { @wiki.body } %>
   </div>
 
   <% #if current_user %>
