@@ -173,14 +173,14 @@ sub = Subscription.create!(
 
 
 #Create Private Wiki Pages
-Wiki.create!(
+admins_private_wiki = Wiki.create!(
     title: "Admin's Private Wiki",
     body: "This wiki page is for Admin only.",
     user: admin,
     private: true
 )
 
-Wiki.create!(
+premium_users_private_wiki = Wiki.create!(
     title: "Premium User's Private Wiki",
     body: "This is Premium User's wiki. Stay out!",
     user: premium_user,
@@ -242,10 +242,13 @@ end
     )
 end
 
+# Create Collaborations
+standard_user.collaborations.create(wiki_id: premium_users_private_wiki.id)
 
 puts "Seed finished"
 # puts "#{Plan.count} plans created"
 puts "#{Subscription.count} subscriptions created"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
+puts "#{Collaboration.count} collaboration(s) created"
 

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130081956) do
+ActiveRecord::Schema.define(version: 20171205083208) do
+
+  create_table "collaborations", force: :cascade do |t|
+    t.integer "wiki_id"
+    t.integer "collaborator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collaborator_id"], name: "index_collaborations_on_collaborator_id"
+    t.index ["id"], name: "index_collaborations_on_id", unique: true
+    t.index ["wiki_id", "collaborator_id"], name: "index_collaborations_on_wiki_id_and_collaborator_id", unique: true
+    t.index ["wiki_id"], name: "index_collaborations_on_wiki_id"
+  end
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id"
@@ -45,10 +56,14 @@ ActiveRecord::Schema.define(version: 20171130081956) do
     t.integer "role"
     t.string "username"
     t.string "stripe_customer_id"
+    t.datetime "subscribed_at"
+    t.datetime "subscription_expires_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
+    t.index ["subscribed_at"], name: "subscribed_at_for_users"
+    t.index ["subscription_expires_at"], name: "expiring_subscritions_on_users"
   end
 
   create_table "wikis", force: :cascade do |t|
