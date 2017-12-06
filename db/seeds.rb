@@ -253,4 +253,8 @@ puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
 puts "#{Wiki.count} wikis created"
 puts "#{Collaborator.count} collaborators created"
+puts "The collaborators are #{premium_users_private_wiki.collaborators}"
+puts "The collaborators are #{premium_users_private_wiki.users}"
+puts "The collaborators are #{standard_user.collaborators}"
+
 

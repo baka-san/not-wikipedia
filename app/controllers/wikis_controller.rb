@@ -7,6 +7,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.users
     authorize @wiki
   end
 
