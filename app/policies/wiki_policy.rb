@@ -29,6 +29,10 @@ class WikiPolicy < ApplicationPolicy
     end
   end 
 
+  # def new?
+  #   create?
+  # end
+
   def update?
     if @wiki.private?
       authorized_for_this_private_wiki?
@@ -36,6 +40,10 @@ class WikiPolicy < ApplicationPolicy
       @user.present?
     end
   end
+
+  # def edit?
+  #   update?
+  # end
 
   def destroy?
     if @wiki.private?
@@ -46,17 +54,48 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def authorized_for_this_private_wiki?
-    @user && (@user == @wiki.user || @user.admin?)
+    @user && (@user == @wiki.owner || @user.admin? || @wiki.collaborators.include?(@user))
   end
 
   class Scope < Scope
-    def resolve
-      if user && user.admin?
-        scope.all
-      else
-        scope.where(private: false).or(scope.where(user: user))
-      end
+
+    attr_reader :user, :scope
+    
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
     end
+
+
+    def resolve
+      wikis = []
+
+      if user && user.admin?
+        wikis = scope.all
+
+      elsif user && user.premium?
+        all_wikis = scope.all
+
+        all_wikis.each do |wiki|
+          if wiki.public? || wiki.owner == user || wiki.collaborators.include?(user)
+            wikis << wiki
+          end
+        end
+
+      else
+        # scope.where(private: false).or(scope.where(user: user))
+        all_wikis = scope.all
+
+        all_wikis.each do |wiki|
+          if wiki.public? || wiki.collaborators.include?(user)
+            wikis << wiki
+          end
+        end
+      end
+
+      wikis 
+    end
+
   end
 
 end

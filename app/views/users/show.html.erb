@@ -2,10 +2,10 @@
 <p>Member since: <%= distance_of_time_in_words_to_now(@user.confirmed_at) %></p>
 <p>Membership: <%= @user.role %></p>
 
-
+<% current_user.collaborating.each do |wiki| %>
+  <%= wiki.title %>
+<% end %>
 <% if @user == current_user %>
-
-<p>Next payment: <%= @date %></p>
 
   <% if @user.premium? %>
     <div class="col-md-4 upgrade-downgrade">

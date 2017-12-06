@@ -10,10 +10,8 @@ class User < ApplicationRecord
   # has_many :wikis, through: :collaborations, source: :wiki
 
   has_many :wikis, dependent: :destroy
-  has_many :collaborations, class_name: "Collaboration",
-                            foreign_key: "collaborator_id",
-                            dependent: :destroy
-  has_many :coop_wikis, through: :collaborations, source: :wiki
+  has_many :collaborations, dependent: :destroy
+  has_many :collaborating, through: :collaborations, source: :wiki
   
   has_one :subscription, dependent: :destroy
 

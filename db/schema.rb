@@ -14,12 +14,12 @@ ActiveRecord::Schema.define(version: 20171205083208) do
 
   create_table "collaborations", force: :cascade do |t|
     t.integer "wiki_id"
-    t.integer "collaborator_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collaborator_id"], name: "index_collaborations_on_collaborator_id"
     t.index ["id"], name: "index_collaborations_on_id", unique: true
-    t.index ["wiki_id", "collaborator_id"], name: "index_collaborations_on_wiki_id_and_collaborator_id", unique: true
+    t.index ["user_id"], name: "index_collaborations_on_user_id"
+    t.index ["wiki_id", "user_id"], name: "index_collaborations_on_wiki_id_and_user_id", unique: true
     t.index ["wiki_id"], name: "index_collaborations_on_wiki_id"
   end
 

@@ -15,4 +15,10 @@
     </div>
   <% #end %>
 
+  <div class="col-md-4 edit-delete">
+    <% @wiki.collaborators.each do |collaborator| %>
+      <%= collaborator.email %>
+    <% end %>
+  </div>
+
 </div>
