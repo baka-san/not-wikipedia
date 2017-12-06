@@ -56,10 +56,14 @@ ActiveRecord::Schema.define(version: 20171206015706) do
     t.integer "role"
     t.string "username"
     t.string "stripe_customer_id"
+    t.datetime "subscribed_at"
+    t.datetime "subscription_expires_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
+    t.index ["subscribed_at"], name: "subscribed_at_for_users"
+    t.index ["subscription_expires_at"], name: "expiring_subscritions_on_users"
   end
 
   create_table "wikis", force: :cascade do |t|
