@@ -2,8 +2,13 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    # @plan = Stripe::Plan.retrieve(id: 'premium')
-    @subscription = Subscription.new
+    if current_user.upgraded_account?
+      flash[:alert] = "You're already a premium member you silly goose!"
+      redirect_to current_user
+    else
+      # @plan = Stripe::Plan.retrieve(id: 'premium')
+      @subscription = Subscription.new
+    end
   end
 
   def create

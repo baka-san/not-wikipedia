@@ -1,2 +1,58 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="row welcome-index">
+ 
+
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <div class="col-xs-12">
+      <h2>Not Wikipedia:</h2>
+      <h3>Like Wikipedia, Only Not.</h3>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="jumbotron">
+
+        <% if current_user%>
+          <h3>Thanks for hanging around. 
+          Why don't you head on over to your profile or check out some wikis?</h3>
+
+          <%= button_to "Profile", 
+                        user_path(current_user), 
+                        class: "btn btn-primary btn-lg", 
+                        method: :get %>
+
+        <% else %>
+          <h3>Create and Share *Markdown* Wikis</h3>
+          <%= button_to "Sign Up", 
+                        new_user_registration_path, 
+                        class: "btn btn-primary btn-lg", 
+                        method: :get %>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Create as many public <br> wikis as you want!</h3>
+      <% if current_user%>
+        <%= button_to "Create Wiki", 
+                      new_wiki_path, 
+                      class: "btn btn-primary btn-lg", 
+                      method: :get %>
+      <% else %>
+        <%= button_to "Free Plan", 
+                      new_user_registration_path, 
+                      class: "btn btn-primary btn-lg", 
+                      method: :get %>
+      <% end %>
+
+               
+    </div>
+    <div class="col-md-6">
+      <h3>Collaborate with friends <br> on private wikis!</h3>
+      <%= button_to "Premium Plan", 
+                    new_subscription_path, 
+                    class: "btn btn-primary btn-lg", 
+                      method: :get %>
+    </div>
+  </div>
+
+</div>
