@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :wikis, dependent: :destroy
+  has_many :collaborators, dependent: :destroy
+
   has_one :subscription, dependent: :destroy
 
   before_save { self.role ||= :standard }

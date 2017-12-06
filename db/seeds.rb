@@ -180,7 +180,7 @@ Wiki.create!(
     private: true
 )
 
-Wiki.create!(
+premium_users_private_wiki = Wiki.create!(
     title: "Premium User's Private Wiki",
     body: "This is Premium User's wiki. Stay out!",
     user: premium_user,
@@ -243,9 +243,14 @@ end
 end
 
 
+# Create Contributors
+standard_user.collaborators.create!(wiki_id: premium_users_private_wiki.id)
+
 puts "Seed finished"
 # puts "#{Plan.count} plans created"
 puts "#{Subscription.count} subscriptions created"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
+puts "#{Wiki.count} wikis created"
+puts "#{Collaborator.count} collaborators created"
 
