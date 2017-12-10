@@ -18,22 +18,22 @@
       </div>
 
     <% elsif current_user %>
-        <div class="col-sm-6">
-          <h4>Create as many public <br> wikis as you want!</h4>
-          <%= button_to "Create Wiki", 
-                        new_wiki_path, 
-                        class: "btn btn-primary btn-lg vertical-bottom", 
+      <div class="col-sm-6">
+        <h4>Create as many public <br> wikis as you want!</h4>
+        <%= button_to "Create Wiki", 
+                      new_wiki_path, 
+                      class: "btn btn-primary btn-lg", 
+                      method: :get %>
+      </div>
+
+
+      <div class="col-sm-6">
+        <h4>Collaborate with friends <br> on private wikis!</h4>
+        <%= button_to "Premium Plan", 
+                      new_subscription_path, 
+                      class: "btn btn-primary btn-lg", 
                         method: :get %>
-        </div>
-
-
-        <div class="col-sm-6">
-          <h4>Collaborate with friends on private wikis.</h4>
-          <%= button_to "Premium Plan", 
-                        new_subscription_path, 
-                        class: "btn btn-primary btn-lg", 
-                          method: :get %>
-        </div>
+      </div>
       
     <% else %>
       <div class="col-sm-6">
@@ -53,5 +53,7 @@
       </div>
     <% end %>          
   </div>
+
+
 
 </div>

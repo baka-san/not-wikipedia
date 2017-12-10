@@ -23,19 +23,26 @@
 @import "welcome.scss";
 @import "wikis.scss";
 
+// Nasty navbar
+.nav {
 
+  @media (max-width: $screen-sm) {
+    a {
+      padding-right: 3px !important;
+      padding-left:  3px !important;
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 120px;
+    // text-align: right;
+  }
+
+}
 
 body {
-  font-size: $base-font-size !important;
+  font-size: $base-font-size;
 
-  // font-size: 16px;
-  // @media (max-width: $screen-sm) { 
-  //   font-size: 16px;
-  //  }
-
-  // @media (min-width: $screen-sm) { 
-  //   font-size: 14px;
-  //  }
 }
 
 // h1 { font-size: 2em; }

@@ -19,30 +19,37 @@
     <div class="container-fluid">
 
       <!-- NAVBAR -->
-      <ul class="nav nav-tabs">
-        <li><%= link_to "Not Wikipedia", root_path %></li>
-        <li><%= link_to "About", welcome_about_path %></li>
+        <ul class="nav nav-tabs">
+          <li><%= link_to "Not Wikipedia", root_path, class: 'navbar-link'%></li>
+          <li><%= link_to "About", welcome_about_path, class: 'navbar-link' %></li>
+        
+          <% if current_user %>
+            <li class="dropdown pull-right">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon">&#xe055;</span></a>
+              <ul class="dropdown-menu">
+                <li class="">
+                  <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
+                </li>
+                <li class="">
+                  <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
+                </li>
+              </ul>
+            </li>
+              
+            <li class="pull-right">
+              <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
+            </li>
 
-        <% if current_user %>
-          <li class="pull-right">
-            <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
-          </li>
-          <li class="pull-right">
-            <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
-          </li>
-          <li class="pull-right">
-            <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
-          </li>
-
-        <% else %>
-          <li class="pull-right">
-            <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
-          </li> 
-          <li class="pull-right">
-            <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
-          </li>
-        <% end %> 
-      </ul>
+          <% else %>
+            <li class="pull-right">
+              <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
+            </li> 
+            <li class="pull-right">
+              <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+            </li>
+          <% end %> 
+        </ul>
+ 
 
       <!-- PRINT ERRORS -->
       <% if flash[:notice] %>
