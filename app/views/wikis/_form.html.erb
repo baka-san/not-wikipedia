@@ -26,8 +26,14 @@
         <%= f.check_box :private %> Private wiki
       <% end %>
     </div>
+  <% elsif %>
+    <p><%= link_to  "Go Premium", 
+                    new_subscription_path, 
+                    class: "", 
+                    method: :get %> 
+      to change the privacy of this wiki.
+    </p>
   <% else %>
-    <p>This will be a public wiki.</p>
   <% end %>
   
   <div class="form-group">

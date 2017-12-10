@@ -22,9 +22,11 @@
 @import "users.scss";
 @import "welcome.scss";
 @import "wikis.scss";
+@import "wiki_sidebar.scss";
 
 // Nasty navbar
 .nav {
+  background-color: white;
 
   @media (max-width: $screen-sm) {
     a {
@@ -42,6 +44,13 @@
 
 body {
   font-size: $base-font-size;
+
+  // For fixed navbar
+  padding-top: 44px;
+
+  // Stop x scrollbar on wiki sidebar
+  // max-width: 100% !important;
+  // overflow-x: hidden !important;
 
 }
 

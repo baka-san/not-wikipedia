@@ -17,3 +17,24 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+var ready = function() {
+  $("#menuToggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+
+  $('#testing').on('click', function () {
+    
+    $(this).css("background-color", "yellow");
+  });
+
+};
+
+
+// Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
+$(document).on('turbolinks:load', ready);  
+
+// $(document).ready(ready);
+

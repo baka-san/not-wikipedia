@@ -1,12 +1,17 @@
-<h1>Edit Wiki</h1>
+<div class="row wiki-edit">
 
-<div class="row">
+  <div class="col-sm-6">
+    <h2>Edit Wiki</h2>
 
-  <div class="col-md-6">
     <%= render partial: 'form', locals: { wiki: @wiki} %>
+
+    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to end this wiki\'s life?'} %>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-sm-6">
+
+    <h2>Live Preview</h2>
+
     <%= markdown { @wiki.body} %>
   </div>
 
