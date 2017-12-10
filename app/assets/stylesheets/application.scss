@@ -13,5 +13,88 @@
  *= require_self
  */
 
- @import "bootstrap-sprockets";
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "variables.scss";
+@import "stripe.scss";
+@import "subscriptions.scss";
+@import "users.scss";
+@import "welcome.scss";
+@import "wikis.scss";
+
+
+
+body {
+  font-size: $base-font-size !important;
+
+  // font-size: 16px;
+  // @media (max-width: $screen-sm) { 
+  //   font-size: 16px;
+  //  }
+
+  // @media (min-width: $screen-sm) { 
+  //   font-size: 14px;
+  //  }
+}
+
+// h1 { font-size: 2em; }
+// h2 { font-size: 1.5em; }
+// h3 { font-size: 1.17em; }
+// h4 { font-size: 1.12em; }
+// h5 { font-size: .83em; }
+// h6 { font-size: .75em; }
+
+p {
+  font-size: calc(1.0em + 0.25vw) !important;
+}
+
+h1 {
+  font-size: calc(2.0em + 3.0vw) !important;
+  font-weight: bold !important;
+}
+
+h2 {
+  font-size: calc(1.5em + 1.0vw) !important;
+}
+
+h3 {
+  font-size: calc(1.17em + 0.75vw)  !important;
+}
+
+h4 {
+  font-size: calc(1.0em + 0.5vw) !important;
+}
+
+
+
+// Remove the resize on all textboxes
+textarea {
+  resize: none;
+}
+
+
+// Put this in the parent? to vert-center
+.vertical-center {
+  display: flex !important;
+  align-items: center !important;
+}
+
+// Put this in the parent? to vert-align bottom
+.vertical-bottom {
+  display: flex !important;
+  align-items: flex-end !important;
+}
+
+// Put this in the parent? to horz-center
+.horizontal-center {
+  display: flex !important;
+  justify-content: center !important;
+  // flex-wrap: wrap !important;
+  // display: inline !important;
+  // text-align: center !important;
+}
+
+.flex-container {
+  display: flex !important;
+}
