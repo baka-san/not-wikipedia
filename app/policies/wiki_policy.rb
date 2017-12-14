@@ -95,7 +95,42 @@ class WikiPolicy < ApplicationPolicy
 
       wikis 
     end
+  end
 
+  class CurrentUserScope < Scope
+
+    attr_reader :user, :scope
+    
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      super.where(user_id: user_id)
+    end
+  end
+
+  class CollaboratingScope < Scope
+
+    attr_reader :user, :scope
+    
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      wikis = []
+
+      scope.each do |wiki|
+        if user.collaborating.include?(wiki)
+          wikis << wiki
+        end
+      end
+
+      wikis
+    end
   end
 
 end

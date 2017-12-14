@@ -3,7 +3,13 @@ class WikisController < ApplicationController
 
   def index
     @wikis = policy_scope(Wiki)
+    # @index = WikiPolicy::CurrentUserScope.new(current_user, @wikis).resolve
     @index = @wikis
+
+    # could use HasScope easily...just link_to your queries
+    # https://github.com/plataformatec/has_scope
+    # Shouldn't I use pundit?
+
   end
 
   def show

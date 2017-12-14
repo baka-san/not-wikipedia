@@ -35,9 +35,9 @@
 
       <% elsif @user.standard? %>
         <div class="col-md-4 upgrade-downgrade">
-        <%= button_to "Premium Plan", 
+        <%= button_to "Upgrade to Premium", 
                       new_subscription_path, 
-                      class: "btn btn-primary btn-lg", 
+                      class: "btn btn-primary btn-md", 
                         method: :get %>
         </div>    
       <% end %>

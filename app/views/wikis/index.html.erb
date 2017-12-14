@@ -1,35 +1,14 @@
 <div class="row wiki-index" id="wrapper">
 
-  <!-- Sidebar button -->
-  <% if current_user %>
-    <div class="col-xs-1 menu-toggle-button">
-      <h3><a class="menu-toggle" id="menuToggle"><span class="glyphicon">&#xe056;</span></a></h3>
-    </div>
-  <% end %>
-
   <!-- Sidebar -->
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand"><strong>Wiki Options</strong></li>
-      <li><%= link_to "New Wiki", new_wiki_path%></li>
-      <li><a href="" id="allWikis">All Wikis</a></li>
-      <li><a href="" id="yourWikis">Your Wikis</a></li>
-      <li><a href="" id="collaborating">Collaborating</a></li>
-    </ul>
-  </div>
+  <%= render partial: 'sidebar', locals: { wiki: @wiki} %>
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-  
-    <div class="col-xs-8">
-      <h1>Wikis</h1>
-    </div>
-
     <div class="col-xs-12 col-md-8">
+      <h1>Wikis</h1>
       <%= render @index %>
-    </div>
-  
+    </div> 
   </div>
-
 
 </div>
