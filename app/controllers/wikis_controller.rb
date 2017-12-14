@@ -3,6 +3,7 @@ class WikisController < ApplicationController
 
   def index
     @wikis = policy_scope(Wiki)
+    @index = @wikis
   end
 
   def show

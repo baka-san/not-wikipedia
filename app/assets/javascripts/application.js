@@ -20,18 +20,25 @@
 
 
 var ready = function() {
+  // Toggle sidebar on button click
   $("#menuToggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
   });
 
-  $('#testing').on('click', function () {
-    
-    $(this).css("background-color", "yellow");
-  });
+  // Toggle sidebar on window load for larger screens
+  if ($(window).width() > 768) {
+    $("#wrapper").addClass("toggled");
+  }
+
+  // // Toggle sidebar on button click
+  // $("#yourWikis").click(function(e) {
+  //     e.preventDefault();
+  //     // $("").toggleClass("toggled");
+  //     @index = @user.
+  // });
 
 };
-
 
 // Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
 $(document).on('turbolinks:load', ready);  

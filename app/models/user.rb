@@ -40,6 +40,14 @@ class User < ApplicationRecord
     self.role = "admin"
   end
 
+  def wikis?
+    !self.wikis.empty?
+  end
+
+  def collaborating?
+    !self.collaborating.empty?
+  end
+
   private 
     def skip_user_confirmation!
       self.confirm if Rails.env.development? || Rails.env.test?

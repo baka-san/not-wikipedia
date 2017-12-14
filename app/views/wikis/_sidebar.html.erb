@@ -1,25 +1,31 @@
-<div class="wrapper wiki-show-sidebar">
+<!-- Sidebar button -->
+<% if current_user %>
+  <div class="col-xs-1 menu-toggle-button">
+    <h3><a class="menu-toggle" id="menuToggle"><span class="glyphicon">&#xe056;</span></a></h3>
+  </div>
+<% end %>
 
-  <nav id="sidebar">
-      <!-- Sidebar Header -->
-      <div class="sidebar-header">
-          <h3>Collapsible Sidebar</div>
-      </div>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand"><strong>Wiki Options</strong></li>
+    <li><%= link_to "Edit", edit_wiki_path(@wiki), class: '' %></li>
+    <li><%= link_to "Delete Wiki", @wiki, 
+                    method: :delete, 
+                    class: '', 
+                    data: {confirm: 'Are you sure you want to end this wiki\'s life?'} %>
+    </li>
 
-      <!-- Sidebar Links -->
-      <ul class="list-unstyled components">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Contact</a></li>
-      </ul>
-  </nav>
+    <% if @wiki.private? %>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Collaborators<span class="caret"></span></button></a>
+        <ul class="dropdown-menu">
+          <% @wiki.collaborators.each do |collaborator| %>
+            <li><%= link_to collaborator.email, user_path(collaborator), class: 'navbar-link'%></li>
+          <% end %>   
+        </ul>
+      </li> 
+    <% end %>
 
-  <div id="content">
-      <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-          <i class="glyphicon glyphicon-align-left"></i>
-          Toggle Sidebar
-      </button>
-  <div>
-
+  </ul>
 </div>

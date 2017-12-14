@@ -1,36 +1,71 @@
-<h1><%= @user.username %>'s Profile</h1>
-<p>Member since: <%= distance_of_time_in_words_to_now(@user.confirmed_at) %></p>
-<p>Membership: <%= @user.role %></p>
+<div class="row user-show">
+  
+  <div class="col-xs-12">
+    <h2><%= @user.username %>'s Profile</h2>
+    <p>Member since: <%= distance_of_time_in_words_to_now(@user.confirmed_at) %></p>
+    <p>Membership: <%= @user.role %></p>
+  </div>
 
-<% current_user.collaborating.each do |wiki| %>
-  <%= wiki.title %>
-<% end %>
-<% if @user == current_user %>
+  <!-- Autopay stuff -->
+  <% if @user == current_user %>
 
-  <% if @user.premium? %>
-    <div class="col-md-4 upgrade-downgrade">
-      <% if @user.subscription.autopay %>
-        <%= link_to "Turn off autopay", 
-          :turn_off_autopay, 
-          class: 'btn btn-error', 
-          data: { confirm: "Canceling autopay will cause your account to be downgraded at the end of the billing cycle, causing all of your private wikis to become public (omg)." },
-          method: :post 
-        %>
-      <% else %>
-        <%= link_to "Turn on autopay", 
-          :turn_on_autopay, 
-          class: 'btn btn-error', 
-          data: { confirm: "Your card will automatically be charged at the end of each billing cycle unless autopay is manually canceled." },
-          method: :post %>
+    <div class="col-xs-12">
+      <% if @user.premium? %>
+
+        <p>Subscription ends on: <%= display_date(@user.subscription.current_period_end) %></p>
+
+        <div class="col-md-4 upgrade-downgrade">
+          <% if @user.subscription.autopay %>
+            <%= button_to "Turn off autopay", 
+              :turn_off_autopay, 
+              class: 'btn btn-warning btn-sm', 
+              data: { confirm: "Canceling autopay will cause your account to be downgraded at the end of the billing cycle, causing all of your private wikis to become public (omg)." },
+              method: :post 
+            %>
+          <% else %>
+            <%= button_to "Turn on autopay", 
+              :turn_on_autopay, 
+              class: 'btn btn-primary btn-sm', 
+              data: { confirm: "Your card will automatically be charged at the end of each billing cycle unless autopay is manually canceled." },
+              method: :post %>
+          <% end %>
+        </div>
+
+        <!-- put credit card info here or put a LINK TO SUBSCRIPTIONS/UPDATE -->
+
+      <% elsif @user.standard? %>
+        <div class="col-md-4 upgrade-downgrade">
+        <%= button_to "Premium Plan", 
+                      new_subscription_path, 
+                      class: "btn btn-primary btn-lg", 
+                        method: :get %>
+        </div>    
       <% end %>
     </div>
-
-    <!-- put credit card info here or put a LINK TO SUBSCRIPTIONS/UPDATE -->
-
-  <% elsif @user.standard? %>
-    <div class="col-md-4 upgrade-downgrade">
-      <%= link_to "Upgrade Account", new_subscription_path, class: 'btn btn-error' %>
-    </div>    
   <% end %>
 
-<% end %>
+  <div class="col-xs-12">
+    <h3> <%= @user.username %>'s Wikis </h3>
+
+    <% if @user.wikis? %>
+      <% @user.wikis.each do |wiki| %>
+        <%= link_to wiki.title, wiki_path %> <br>
+      <% end %>
+    <% else %>
+      <p>Hasn't created any wikis.</p> 
+    <% end %>
+  </div>
+
+  <div class="col-xs-12">
+    <h3> Currently Collaborating On</h3>
+
+    <% if @user.collaborating? %>
+      <% @user.collaborating.each do |wiki| %>
+        <%= link_to wiki.title, wiki_path %> <br>
+      <% end %>
+    <% else %>
+      <p>Not currently collaborating on any wiki's.</p> 
+    <% end %>
+  </div>
+
+</div>

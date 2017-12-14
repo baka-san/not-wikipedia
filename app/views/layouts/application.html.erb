@@ -22,6 +22,7 @@
         <ul class="nav nav-tabs navbar-fixed-top">
           <li><%= link_to "Not Wikipedia", root_path, class: 'navbar-link'%></li>
           <li><%= link_to "About", welcome_about_path, class: 'navbar-link' %></li>
+          <li><%= link_to "Wikis", wikis_path, class: 'navbar-link' %></li>
         
           <% if current_user %>
             <li class="dropdown pull-right">

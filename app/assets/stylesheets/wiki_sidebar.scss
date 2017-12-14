@@ -4,12 +4,12 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+// small screen
 // toggled on = showing
 // toggled off = hidden
 
 $sidebar-width: 150px;
 $sidebar-width-mobile: 100px;
-
 
 .menu-toggle-button {
     position: fixed;
@@ -22,10 +22,14 @@ $sidebar-width-mobile: 100px;
     * {
       margin-top: 0px;
     }
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 #wrapper.toggled .menu-toggle-button {
-  // margin-left: $sidebar-width;
+  margin-left: $sidebar-width;
 }
 
 #wrapper {
@@ -37,7 +41,7 @@ $sidebar-width-mobile: 100px;
 }
 
 #wrapper.toggled {
-  padding-left: $sidebar-width;
+  // padding-left: $sidebar-width;
 }
 
 #sidebar-wrapper {
@@ -60,14 +64,18 @@ $sidebar-width-mobile: 100px;
 }
 
 #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
+  padding: 20px;
+  position: relative;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -$sidebar-width;
+  position: relative;
+  // margin-right: 0;
+  margin-left: $sidebar-width;
 }
 
 /* Sidebar Styles */
@@ -117,43 +125,3 @@ $sidebar-width-mobile: 100px;
     color: #fff;
     background: none;
 }
-
-@media(max-width: $screen-sm) {
-
-  #wrapper {
-    padding-left: $sidebar-width;
-  }
-
-  #wrapper.toggled {
-    padding-left: 0;
-  }
-
-  #sidebar-wrapper {
-    width: $sidebar-width;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-
-  #page-content-wrapper {
-    padding: 20px;
-    position: relative;
-  }
-
-  #wrapper.toggled #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
-}
-
-// @media(max-width: $screen-sm) {
-
-//   #wrapper.toggled .menu-toggle-button {
-//     margin-left: $sidebar-width;
-//     -webkit-transition: all 0.5s ease;
-//     -moz-transition: all 0.5s ease;
-//     -o-transition: all 0.5s ease;
-//     transition: all 0.5s ease;
-//   }
-// }

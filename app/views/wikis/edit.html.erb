@@ -1,18 +1,35 @@
-<div class="row wiki-edit">
+<div class="row wiki-edit" id="wrapper">
 
-  <div class="col-sm-6">
-    <h2>Edit Wiki</h2>
+  <!-- Render sidebar -->
+  <%= render partial: 'sidebar', locals: { wiki: @wiki} %>
 
-    <%= render partial: 'form', locals: { wiki: @wiki} %>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
 
-    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to end this wiki\'s life?'} %>
-  </div>
+    <div class="col-sm-6">
+      <h2>Edit Wiki</h2>
 
-  <div class="col-sm-6">
+      <%= render partial: 'form', locals: { wiki: @wiki} %>
 
-    <h2>Live Preview</h2>
+      <% if @wiki.collaborators? %>
+        <h3>Collaborators: </h3>
+        <% @wiki.collaborators.each do |collaborator| %>
+          <li><%= link_to collaborator.email, user_path(collaborator), class: 'navbar-link'%></li>
+        <% end %>   
+      <% end %>
+      <% %>
+      <% %>
 
-    <%= markdown { @wiki.body} %>
+
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <h2>Live Preview</h2>
+
+      <%= markdown { @wiki.body} %>
+    </div>
   </div>
 
 </div>

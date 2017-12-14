@@ -24,4 +24,8 @@ class Wiki < ApplicationRecord
     self.user
   end
 
+  def collaborators?
+    !self.collaborators.empty?
+  end
+
 end

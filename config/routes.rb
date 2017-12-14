@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :wikis
+
+  resources :wikis, only: [] do
+    resources :collaborations, only: [:index, :create, :destroy]
+  end
+  
   resources :subscriptions, only: [:new, :create]
 
   post '/turn_on_autopay' => 'subscriptions#turn_on_autopay', as: :turn_on_autopay
