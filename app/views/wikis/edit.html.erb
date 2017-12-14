@@ -17,18 +17,11 @@
           <li><%= link_to collaborator.email, user_path(collaborator), class: 'navbar-link'%></li>
         <% end %>   
       <% end %>
-      <% %>
-      <% %>
-
-
-
     </div>
 
     <div class="col-sm-6">
-
       <h2>Live Preview</h2>
-
-      <%= markdown { @wiki.body} %>
+      <div id="live_wiki_preview"></div>
     </div>
   </div>
 

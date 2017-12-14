@@ -14,6 +14,7 @@
 // add jquery and boostrap
 //= require jquery
 //= require jquery_ujs
+//= require markdown
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
@@ -30,18 +31,8 @@ var ready = function() {
   if ($(window).width() > 768) {
     $("#wrapper").addClass("toggled");
   }
-
-  // // Toggle sidebar on button click
-  // $("#yourWikis").click(function(e) {
-  //     e.preventDefault();
-  //     // $("").toggleClass("toggled");
-  //     @index = @user.
-  // });
-
 };
 
 // Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
 $(document).on('turbolinks:load', ready);  
-
-// $(document).ready(ready);
 

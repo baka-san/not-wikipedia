@@ -76,12 +76,12 @@ gem 'byebug'
 
 gem 'stripe'
 
-gem 'stripe_event'
-
-gem 'stripe-ruby-mock', '~> 2.5.0', :require => 'stripe_mock'
+# gem 'stripe_event'
 
 gem 'figaro'
 
 gem 'stripe-ruby-mock', '~> 2.5.0', :require => 'stripe_mock'
 
 gem 'redcarpet'
+
+gem 'rails-assets-markdown', source: 'https://rails-assets.org'

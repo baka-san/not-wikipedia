@@ -1,5 +1,7 @@
 {
   "name": "not-wikipedia",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "markdown": "^0.5.0"
+  }
 }
