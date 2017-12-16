@@ -49,9 +49,9 @@ var ready = function() {
   // $("#sidebar-wrapper").addClass("transitions");
   // $("#page-content-wrapper").addClass("transitions");
     
-  // $(document).ready(function() {
-  //   $("body").removeClass("preload");
-  // })
+  $(document).ready(function() {
+    $("body").removeClass("preload");
+  })
 
 };
 
