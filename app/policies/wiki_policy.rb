@@ -99,21 +99,17 @@ class WikiPolicy < ApplicationPolicy
 
   class CurrentUserScope < Scope
 
-    attr_reader :user, :scope
-    
     def initialize(user, scope)
       @user = user
       @scope = scope
     end
 
     def resolve
-      super.where(user_id: user_id)
+      scope.where(user_id: @user_id)
     end
   end
 
   class CollaboratingScope < Scope
-
-    attr_reader :user, :scope
     
     def initialize(user, scope)
       @user = user

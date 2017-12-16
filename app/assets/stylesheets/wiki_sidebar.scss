@@ -11,6 +11,22 @@
 $sidebar-width: 150px;
 $sidebar-width-mobile: 100px;
 
+// No transitions when the page loads
+// Remove with jQuery after page load
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+.transitions {
+  -webkit-transition: all 0.5s ease !important;
+  -moz-transition: all 0.5s ease !important;
+  -o-transition: all 0.5s ease !important;
+  transition: all 0.5s ease !important;  
+}
+
 .menu-toggle-button {
     position: fixed;
     width: 20px;

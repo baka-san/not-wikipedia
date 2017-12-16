@@ -19,7 +19,6 @@
 //= require bootstrap
 //= require_tree .
 
-
 var ready = function() {
   // Toggle sidebar on button click
   $("#menuToggle").click(function(e) {
@@ -31,8 +30,32 @@ var ready = function() {
   if ($(window).width() > 768) {
     $("#wrapper").addClass("toggled");
   }
+
+  
+  // Allow transition effects after page loads
+  // $(window).load(function() {
+  //   $("body").removeClass("preload");
+  // });
+
+  // $(".navbar-link").click(function() {
+  //   $("body").addClass("preload");
+  //   // $("body").removeClass("preload");
+  // });
+
+
+
+  // $("#wrapper").addClass("transitions");
+  // $(".menu-toggle-button").addClass("transitions");
+  // $("#sidebar-wrapper").addClass("transitions");
+  // $("#page-content-wrapper").addClass("transitions");
+    
+  // $(document).ready(function() {
+  //   $("body").removeClass("preload");
+  // })
+
 };
 
 // Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
-$(document).on('turbolinks:load', ready);  
+$(document).on('turbolinks:load', ready); 
+
 
