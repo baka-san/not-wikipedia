@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     get 'user_settings' => 'user_settings#show'
+    # get 'wikis' => 'users#wikis'
+    # resources :wikis, only: [:index]
   end
 
   resources :wikis

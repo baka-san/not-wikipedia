@@ -1,15 +1,20 @@
-<h1>Create a new wiki</h1>
+<div class="row wiki-new">
 
-<div class="row">
-  <div class="col-md-4">
-    <p>Guidelines for wikis:</p>
-    <ul>
-      <li>Make sure the wiki doesn't already exist.</li>
-      <li>Never insult dogs.</li>
-      <li>Smile when you type.</li>
-    </ul>
-  </div>
-  <div class="col-md-8">
+  <div class="col-sm-6">
+    <h2>New Wiki</h2>
+    
     <%= render partial: 'form', locals: { wiki: @wiki} %>
+
+    <% if current_user.premium? || current_user.admin? %>
+
+    <% end %>
   </div>
+
+  <div class="col-sm-6">
+    <h2>Live Preview</h2>
+    <h2 id="live_title_preview"></h2>
+    <div id="live_body_preview"></div>
+  </div>
+
 </div>
+

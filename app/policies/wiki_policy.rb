@@ -97,36 +97,36 @@ class WikiPolicy < ApplicationPolicy
     end
   end
 
-  class CurrentUserScope < Scope
+  # class CurrentUserScope < Scope
 
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
+  #   def initialize(user, scope)
+  #     @user = user
+  #     @scope = scope
+  #   end
 
-    def resolve
-      scope.where(user_id: @user_id)
-    end
-  end
+  #   def resolve
+  #     scope.where(user_id: @user_id)
+  #   end
+  # end
 
-  class CollaboratingScope < Scope
+  # class CollaboratingScope < Scope
     
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
+  #   def initialize(user, scope)
+  #     @user = user
+  #     @scope = scope
+  #   end
 
-    def resolve
-      wikis = []
+  #   def resolve
+  #     wikis = []
 
-      scope.each do |wiki|
-        if user.collaborating.include?(wiki)
-          wikis << wiki
-        end
-      end
+  #     scope.each do |wiki|
+  #       if user.collaborating.include?(wiki)
+  #         wikis << wiki
+  #       end
+  #     end
 
-      wikis
-    end
-  end
+  #     wikis
+  #   end
+  # end
 
 end

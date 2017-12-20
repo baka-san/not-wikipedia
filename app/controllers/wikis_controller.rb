@@ -2,13 +2,20 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @wikis = policy_scope(Wiki)
-    @index = @wikis
-    # @index = WikiPolicy::CurrentUserScope.new(current_user, @wikis).resolve
-    # could use HasScope easily...just link_to your queries
-    # https://github.com/plataformatec/has_scope
-    # Shouldn't I use pundit?
 
+    @wikis = policy_scope(Wiki)
+
+    if params[:filter].present?
+      if filter_params[:my_wikis]
+        @index = current_user.wikis 
+      elsif filter_params[:collaborating]
+        @index = current_user.collaborating 
+      end
+
+      @message = @index.empty? ? "None found." : nil 
+    else
+      @index = @wikis 
+    end
   end
 
   def show
@@ -18,21 +25,33 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+
+
   end
 
   def create
+
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
+
+    # @collaborators = 
     authorize @wiki 
 
-    if @wiki.save
-      flash[:notice] = "Wiki created."
-      redirect_to @wiki
-    else
-      flash.now[:alert] = "There was an error creating the wiki. Please try again."
-      render :new
-    end
 
+byebug
+    respond_to do |format|
+      format.js
+      format.html {
+        if @wiki.save
+          flash[:notice] = "Wiki created."
+          redirect_to @wiki
+        else
+          flash.now[:alert] = "There was an error creating the wiki. Please try again."
+          render :new
+        end
+      }
+
+    end
   end
 
   def edit
@@ -71,6 +90,14 @@ class WikisController < ApplicationController
 
     def wiki_params
       params.require(:wiki).permit(:title, :body, :private)
+    end
+
+    # def collaborator_params
+    #   params.require(:)
+    # end
+
+    def filter_params
+      params.require(:filter).permit(:my_wikis, :collaborating)
     end
 
 end

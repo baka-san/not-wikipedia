@@ -33,9 +33,9 @@ var ready = function() {
 
   
   // Allow transition effects after page loads
-  // $(window).load(function() {
-  //   $("body").removeClass("preload");
-  // });
+  $(window).load(function() {
+    $("body").removeClass("preload");
+  });
 
   // $(".navbar-link").click(function() {
   //   $("body").addClass("preload");
@@ -48,14 +48,27 @@ var ready = function() {
   // $(".menu-toggle-button").addClass("transitions");
   // $("#sidebar-wrapper").addClass("transitions");
   // $("#page-content-wrapper").addClass("transitions");
+
+
     
-  // $(document).ready(function() {
-  //   $("body").removeClass("preload");
-  // })
+ // $(function() {
+ //  $("body").removeClass("preload");
+ // });
+
+ // $('#wrapper').on('load', function() {
+ //   $("body").removeClass("preload");
+ // });
 
 };
 
+// var ready2 = function() {
+
+
+// };
+
 // Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
 $(document).on('turbolinks:load', ready); 
+
+// $(document).on('turbolinks:render', ready2); 
 
 

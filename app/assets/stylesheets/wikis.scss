@@ -15,7 +15,15 @@
   }
 }
 
+.wiki-index {
+
+  #page-content-wrapper .media {
+    padding-left: 5px;
+  }
+}
+
 // Move checkboxes over in form
 .checkbox {
   margin-left: 20px !important;
+  display: inline-block;
 }
