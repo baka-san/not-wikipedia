@@ -42,15 +42,11 @@ var ready = function() {
   //   // $("body").removeClass("preload");
   // });
 
-
-
   // $("#wrapper").addClass("transitions");
   // $(".menu-toggle-button").addClass("transitions");
   // $("#sidebar-wrapper").addClass("transitions");
   // $("#page-content-wrapper").addClass("transitions");
-
-
-    
+   
  // $(function() {
  //  $("body").removeClass("preload");
  // });
