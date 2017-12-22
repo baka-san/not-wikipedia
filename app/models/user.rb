@@ -1,24 +1,24 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-
-  # has_many :wikis, dependent: :destroy
-  # has_many :collaborations, dependent: :destroy
-  # has_many :wikis, through: :collaborations, source: :wiki
-
-  has_many :wikis, dependent: :destroy
-  has_many :collaborations, dependent: :destroy
-  has_many :collaborating, through: :collaborations, source: :wiki
-  
-  has_one :subscription, dependent: :destroy
 
   before_save { self.role ||= :standard }
   after_create :skip_user_confirmation!
 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
+
+  has_many :wikis, dependent: :destroy
+  has_many :collaborations, dependent: :destroy
+  has_many :collaborating, through: :collaborations, source: :wiki
+  has_one :subscription, dependent: :destroy
+
   enum role: [:standard, :premium, :admin]
+
+
+  validates :username, 
+            length: { minimum: 1, maximum: 30 }, 
+            presence: true
+
 
   # def authorized_for_this_private_wiki?(wiki)
   #   self && (self == wiki.user || self.admin?)
@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   def collaborating?
     !self.collaborating.empty?
+  end
+
+  def collaborating_on?(wiki)
+    self.collaborating.include?(wiki)
   end
 
   private 

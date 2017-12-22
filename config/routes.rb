@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   devise_for :users
-  resources :users, only: [:show]
+  resources :users, only: [:index, :show]
 
   resources :users, only: [] do
     get 'user_settings' => 'user_settings#show'

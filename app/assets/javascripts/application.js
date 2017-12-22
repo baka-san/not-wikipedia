@@ -15,7 +15,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require markdown
-//= require turbolinks
 //= require bootstrap
 //= require_tree .
 
@@ -57,14 +56,9 @@ var ready = function() {
 
 };
 
-// var ready2 = function() {
-
-
-// };
-
 // Stack: rails-javascript-not-loading-after-clicking-through-link-to-helper
-$(document).on('turbolinks:load', ready); 
+// $(document).on('turbolinks:load', ready); 
+$(document).ready(ready)
 
-// $(document).on('turbolinks:render', ready2); 
 
 

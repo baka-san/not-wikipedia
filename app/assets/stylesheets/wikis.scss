@@ -15,15 +15,53 @@
   }
 }
 
-.wiki-index {
 
+
+.wiki-index {
   #page-content-wrapper .media {
     padding-left: 5px;
   }
 }
+
+
+.wiki-edit {
+
+  #collaborators_section {
+    position: relative;
+  }
+  .collaborators-list {
+    padding: 0;
+
+    // Push below collaborators search bar for small screens
+    @media (max-width: 500px) { 
+      // margin-top: 130px;
+    }
+  }
+
+  .collaborators-form {
+    padding: 0;
+
+    // Pull above collaborators list for small screens
+    @media (min-width: 500px) { 
+      // order: 2 !important;
+      // position: absolute;
+      // padding-left: 0;
+    }
+  }
+
+  #live_title_preview {
+    margin-top: 0;
+  }
+}
+
+
+
+
+
 
 // Move checkboxes over in form
 .checkbox {
   margin-left: 20px !important;
   display: inline-block;
 }
+

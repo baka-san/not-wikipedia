@@ -6,21 +6,49 @@
   <!-- Page Content -->
   <div id="page-content-wrapper">
 
-    <div class="col-sm-6">
-      <h2>Edit Wiki</h2>
+    <div class="col-xs-12 col-sm-6">
+      <h1>Edit Wiki</h1>
 
       <%= render partial: 'form', locals: { wiki: @wiki} %>
 
+      <div class="hidden toggle_me" id="collaborators_section">
+        <div class="col-xs-6 pull-right collaborators-form" id="collaborators_form"> 
+          <h4><strong>Add Collaborators</strong></h4>
+          
+          <form action="/wikis/<%=@wiki.id%>/collaborations" method="post" data-remote="true">
+            <input id="search_bar" name="email" placeholder="Enter Collaborator's email">
+            <input type="submit" value="Search">
+          </form>
+
+          <h3 class="notice" id="notice"><em></em></h3>
+
+        </div>
+
+        <% if @wiki.collaborators? %>
+          <div class="col-xs-6 collaborators-list" id="collaborators_list">
+            <h4><strong>Currently Collaborating:</strong></h4>
+            <% @wiki.collaborators.each do |collaborator| %>
+              <p><%= link_to collaborator.username, user_path(collaborator), class: ''%></p>
+            <% end %> 
+          </div>  
+
+        <% else %>
+          <div class="col-xs-6 collaborators-list" id="collaborators_list">
+            <h4><strong>Currently Collaborating:</strong></h4>
+              <p>No one's here!</p> 
+          </div>  
+        <% end %>
+      </div>
+
       <% if @wiki.collaborators? %>
-        <h3>Collaborators: </h3>
-        <% @wiki.collaborators.each do |collaborator| %>
-          <li><%= link_to collaborator.email, user_path(collaborator), class: 'navbar-link'%></li>
-        <% end %>   
+        <h3 class="hidden toggle_me" id="removal_warning"><strong>Warning: Collaborators will be removed if made public!</strong></h3>
       <% end %>
+
     </div>
 
-    <div class="col-sm-6">
-      <h2>Live Preview</h2>
+
+    <div class="col-xs-12 col-sm-6">
+      <h1>Live Preview</h1>
       <h2 id="live_title_preview"></h2>
       <div id="live_body_preview"></div>
     </div>

@@ -26,7 +26,6 @@ class WikisController < ApplicationController
   def new
     @wiki = Wiki.new
 
-
   end
 
   def create
@@ -34,29 +33,22 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
-    # @collaborators = 
     authorize @wiki 
 
-
-byebug
-    respond_to do |format|
-      format.js
-      format.html {
-        if @wiki.save
-          flash[:notice] = "Wiki created."
-          redirect_to @wiki
-        else
-          flash.now[:alert] = "There was an error creating the wiki. Please try again."
-          render :new
-        end
-      }
-
+    if @wiki.save
+      flash[:notice] = "Wiki created."
+      redirect_to @wiki
+    else
+      flash.now[:alert] = "There was an error creating the wiki. Please try again."
+      render :new
     end
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+
+    # @collaboration = Collaboration.new
   end
 
   def update
@@ -91,10 +83,6 @@ byebug
     def wiki_params
       params.require(:wiki).permit(:title, :body, :private)
     end
-
-    # def collaborator_params
-    #   params.require(:)
-    # end
 
     def filter_params
       params.require(:filter).permit(:my_wikis, :collaborating)

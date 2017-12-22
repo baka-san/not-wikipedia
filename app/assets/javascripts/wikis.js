@@ -1,9 +1,24 @@
 var ready = function() {  
   
+  // Live markdown preview
   var wikiTitle = document.getElementById("wiki_title");
   var wikiBody = document.getElementById("wiki_body");
   var titlePreview = document.getElementById('live_title_preview')
   var bodyPreview = document.getElementById('live_body_preview')
+
+  var listFormTo12 = function() {
+    currentlyCollaborating.removeClass("col-xs-12");
+    currentlyCollaborating.addClass("col-xs-6");
+    collaboratorsForm.removeClass("col-xs-12");
+    collaboratorsForm.addClass("col-xs-6");
+  };
+
+  var listFormTo6 = function() {
+    currentlyCollaborating.removeClass("col-xs-6");
+    currentlyCollaborating.addClass("col-xs-12");
+    collaboratorsForm.removeClass("col-xs-6");
+    collaboratorsForm.addClass("col-xs-12");
+  };
 
   if (bodyPreview || titlePreview) {
     titlePreview.innerHTML = markdown.toHTML(wikiTitle.value);
@@ -21,54 +36,47 @@ var ready = function() {
   }
 
   // Load the add collaborators form for new and edit pages
+  var collaboratorsSection = $("#collaborators_section");
+  var removalWarning = $("#removal_warning");
   var checkbox = $("#wiki_private");
-  var collaboratorsForm = $("#collaborators_form");
+  var toggleMe = $(".toggle_me");
+
+  $(function() {
+    if (checkbox.is(':checked')) {
+      collaboratorsSection.toggleClass("hidden");
+      removalWarning.addClass("hidden")
+    }
+  });
 
   checkbox.on('change', function() {
-    if (this.checked) {
-      collaboratorsForm.removeClass("hidden");
+
+    // collaboratorsSection.toggleClass("hidden")
+    toggleMe.each( function() {
+      $(this).toggleClass("hidden");
+    });
+  });
+
+  // Move the collaborators search bar above currently collaborating for very small screens
+  var currentlyCollaborating = $("#currently_collaborating");
+  var collaboratorsForm = $("#collaborators_form");
+
+  if ($(window).width() < 500) {
+    listFormTo6();
+  }
+
+  $(window).on('resize', function(){
+    if ($(this).width() < 500) {
+      listFormTo6();
     }
     else {
-      collaboratorsForm.addClass("hidden");
+      listFormTo12();
     }
+
   });
-
-  // Pushing enter in collaborator search box renders a user or error
-  var collaboratorsSearchBar = $("#wiki_collaborations_attributes_0_user_id");
-  var collaboratorsSubmitBtn = $("#collaborators_search_btn");
-
-  collaboratorsSearchBar.on('keypress', function(event) {
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      collaboratorsSubmitBtn.click();
-    }
-  });
-
-  collaboratorsSubmitBtn.on('click', function(event) {
-      alert('hello');
-
-      // search for the email in collaboratorsSearchBar
-      // if email is found in ActiveRecord User model
-        // append a div displaying email text to page WITHOUT reloading page
-          // send AJAX request with email as a param. In the controller @collaborator = 
-        // add a hidden form tag to the form containing the user info to be handled by controller
-        // clear out collaboratorsSearchBar so it can be used to search for another user
-      // if no email
-        // display "no such user" error
-        // clear out collaboratorsSearchBar so it can be used to search for another user
-  });
-
-  // function searchCollaborator(email) {
-  //   var userId = User.where(email: email).id
-  //   $.ajax({
-  //     url: ""
-
-  //   })
-
-  // }
-
 
 };
 
 
-$(document).on('turbolinks:load', ready);  
+$(document).ready(ready)
+// $(document).on('turbolinks:load', ready);  
+

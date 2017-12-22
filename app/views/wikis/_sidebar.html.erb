@@ -40,7 +40,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Collaborators<span class="caret"></span></button></a>
           <ul class="dropdown-menu">
             <% wiki.collaborators.each do |collaborator| %>
-              <li><%= link_to collaborator.email, user_path(collaborator), class: 'navbar-link'%></li>
+              <li><%= link_to collaborator.username, user_path(collaborator), class: 'navbar-link'%></li>
             <% end %>   
           </ul>
         </li> 
