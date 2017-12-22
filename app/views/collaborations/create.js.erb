@@ -1,26 +1,34 @@
-var collaboratorsList = document.getElementById("collaborators_list")
-var notice = document.getElementById("notice")
-var searchBar = document.getElementById("search_bar")
+var collaboratorsList = document.getElementById("collaborators_list");
+var notice = document.getElementById("notice");
+var searchBar = document.getElementById("search_bar");
 
 // Clear previous notices
-notice.innerHTML = ""
+notice.innerHTML = "";
 
 // User is already collaborating
 <% if user && user.collaborating_on?(wiki) %>
-  notice.innerHTML = "That user is already collaborating!"
+  notice.innerHTML = "That user is already collaborating!";
 
 // User is good to go
 <% elsif user %>
-  notice.innerHTML = "Collaborator added."
+  notice.innerHTML = "Collaborator added.";
 
-  var newCollaborator = document.createElement("p")
-  newCollaborator.innerHTML = "<%= link_to collaborator.username, user_path(collaborator) %>"
+  var newCollaborator = document.createElement("p");
 
-  collaboratorsList.appendChild(newCollaborator)
+  var anchor = document.createElement("a");
+  var attr = document.createAttribute("href");
+  attr.value = "<%= url_for(user) %>";
+  var textNode = document.createTextNode("<%= user.username %>");
+
+  anchor.setAttributeNode(attr);
+  anchor.appendChild(textNode);
+  newCollaborator.appendChild(anchor);
+
+  collaboratorsList.appendChild(newCollaborator);
 
 <% else %>
-  notice.innerHTML = "No user found. Try again."
+  notice.innerHTML = "No user found. Try again.";
 <% end %>
 
 // Clear the search bar
-searchBar.value = ""
+searchBar.value = "";

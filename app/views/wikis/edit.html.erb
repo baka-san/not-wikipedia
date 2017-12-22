@@ -26,7 +26,7 @@
 
         <% if @wiki.collaborators? %>
           <div class="col-xs-6 collaborators-list" id="collaborators_list">
-            <h4><strong>Currently Collaborating:</strong></h4>
+            <h4><strong>Currently Collaborating</strong></h4>
             <% @wiki.collaborators.each do |collaborator| %>
               <p><%= link_to collaborator.username, user_path(collaborator), class: ''%></p>
             <% end %> 
@@ -34,8 +34,7 @@
 
         <% else %>
           <div class="col-xs-6 collaborators-list" id="collaborators_list">
-            <h4><strong>Currently Collaborating:</strong></h4>
-              <p>No one's here!</p> 
+            <h4><strong>Currently Collaborating</strong></h4>
           </div>  
         <% end %>
       </div>

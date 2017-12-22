@@ -12,11 +12,11 @@ class CollaborationsController < ApplicationController
         @wiki = Wiki.find(collaboration_params[:wiki_id])
         @user = User.find_by(email: collaboration_params[:email])
 
+        render :create, locals: { user: @user, wiki: @wiki }
+
         if @user && !@user.collaborating_on?(@wiki)
           @collaboration = Collaboration.create(wiki_id: collaboration_params[:wiki_id], user_id: @user.id)
         end
-
-        render :create, locals: { user: @user, wiki: @wiki }
 
         # Use rescue_from?
         # NoMethodError on a nil class i.e. no user
