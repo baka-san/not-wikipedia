@@ -1,34 +1,96 @@
-var collaboratorsList = document.getElementById("collaborators_list");
-var notice = document.getElementById("notice");
-var searchBar = document.getElementById("search_bar");
+var collaboratorsList = $("#collaborators_list");
+var sidebarCollaboratorsList = $("#sidebar_collaborators_list");
+var notice = $("#notice");
+var searchBar = $("#search_bar");
 
 // Clear previous notices
-notice.innerHTML = "";
+notice.text("");
 
 // User is already collaborating
-<% if user && user.collaborating_on?(wiki) %>
-  notice.innerHTML = "That user is already collaborating!";
+switch("<%= state %>") {
 
-// User is good to go
-<% elsif user %>
-  notice.innerHTML = "Collaborator added.";
+  case "exists":
+    notice.text("That user is already collaborating!");
+    break
 
-  var newCollaborator = document.createElement("p");
+  case "new":
+    notice.text("Collaborator added.");
 
-  var anchor = document.createElement("a");
-  var attr = document.createAttribute("href");
-  attr.value = "<%= url_for(user) %>";
-  var textNode = document.createTextNode("<%= user.username %>");
+    var collaborator = 
+      "<p>"
+      +  "<a class='fa fa-times delete-collaborator' data-confirm='Are you sure you want to end this collaborator\'s life?'"
+      +     "data-remote='true' rel='nofollow' data-method='delete' href='<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: user.id)) %>'>"
+      +  '</a> <%= link_to user.username, user_url(user) %>'
+      +"</p>";
 
-  anchor.setAttributeNode(attr);
-  anchor.appendChild(textNode);
-  newCollaborator.appendChild(anchor);
+    var sidebarCollaborator = 
+    "<li>"
+    +  "<a class='fa fa-times delete-collaborator' data-confirm='Are you sure you want to end this collaborator\'s life?'"
+    +     "data-remote='true' rel='nofollow' data-method='delete' href='<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: user.id)) %>'>"
+    +  '</a><%= link_to user.username, user_url(user), class: "collaborator-name" %>'
+    +"</li>";
 
-  collaboratorsList.appendChild(newCollaborator);
+    collaboratorsList.append(collaborator);
+    sidebarCollaboratorsList.append(sidebarCollaborator);
+    break
 
-<% else %>
-  notice.innerHTML = "No user found. Try again.";
-<% end %>
+  default:
+    notice.text("No user found. Try again.");
+}
 
 // Clear the search bar
-searchBar.value = "";
+searchBar.text("");
+
+
+// // Javascript is lame
+// var collaboratorsList = document.getElementById("collaborators_list");
+// var sidebarCollaboratorsList = document.getElementById("sidebar_collaborators_list");
+// var notice = document.getElementById("notice");
+// var searchBar = document.getElementById("search_bar");
+
+// // Clear previous notices
+// notice.innerHTML = "";
+
+// // User is already collaborating
+// <% if user && user.collaborating_on?(wiki) %>
+//   notice.innerHTML = "That user is already collaborating!";
+
+// // User is good to go
+// <% elsif user %>
+//   notice.innerHTML = "Collaborator added.";
+
+//   ""
+
+
+
+//   var newCollaborator = document.createElement("p");
+//   var sidebarCollaborator = document.createElement("li");
+
+//   var anchor1 = document.createElement("a");
+//   var attr1 = document.createAttribute("href");
+//   attr1.value = "<%= url_for(user) %>";
+//   var textNode1 = document.createTextNode("<%= user.username %>");
+
+//   var anchor2 = document.createElement("a");
+//   var attr2 = document.createAttribute("href");
+//   attr2.value = "<%= url_for(user) %>";
+//   var textNode2 = document.createTextNode("<%= user.username %>");
+
+//   anchor1.setAttributeNode(attr1);
+//   anchor1.appendChild(textNode1);
+
+//   anchor2.setAttributeNode(attr2);
+//   anchor2.appendChild(textNode2);
+
+//   newCollaborator.appendChild(anchor1);
+//   collaboratorsList.appendChild(newCollaborator);
+
+//   sidebarCollaborator.appendChild(anchor2);
+//   sidebarCollaboratorsList.appendChild(sidebarCollaborator);
+
+// <% else %>
+//   notice.innerHTML = "No user found. Try again.";
+// <% end %>
+
+// // Clear the search bar
+// searchBar.value = "";

@@ -36,11 +36,18 @@
       
       <!-- Show collaborators -->
       <% if wiki.private? %>
-        <li class="dropdown">
+        <li class="dropdown" id="keep_open">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Collaborators<span class="caret"></span></button></a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" id="sidebar_collaborators_list">
             <% wiki.collaborators.each do |collaborator| %>
-              <li><%= link_to collaborator.username, user_path(collaborator), class: 'navbar-link'%></li>
+              <li><%= link_to wiki_collaboration_path(@wiki, user_id: collaborator.id), 
+                                class: "fa fa-times delete-collaborator",
+                                method: :delete,
+                                data: {confirm: 'Are you sure you want to end this collaborator\'s life?'},
+                                remote: true do %>
+                  <%= link_to collaborator.username, user_path(collaborator), class: "collaborator-name" %>
+                <% end %>
+              </li>
             <% end %>   
           </ul>
         </li> 

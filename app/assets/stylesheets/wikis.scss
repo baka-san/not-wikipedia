@@ -3,16 +3,6 @@
   .wiki-title {
     padding-left: 0;
   }
-
-  .dropdown-menu {
-    margin-top: 0;
-    padding-top: 0;
-    background-color: inherit;
-
-    a {
-      padding: 0 5px;
-    }
-  }
 }
 
 
@@ -30,7 +20,12 @@
     position: relative;
   }
   .collaborators-list {
-    padding: 0;
+    padding-left: 0;
+
+    a {
+      text-decoration: none;
+    }
+
 
     // Push below collaborators search bar for small screens
     @media (max-width: 500px) { 
@@ -39,13 +34,17 @@
   }
 
   .collaborators-form {
-    padding: 0;
+    padding-right: 0;
 
-    // Pull above collaborators list for small screens
-    @media (min-width: 500px) { 
-      // order: 2 !important;
-      // position: absolute;
-      // padding-left: 0;
+    #search_bar {
+      width: -webkit-fill-available;
+      width: -moz-fill-available;
+      width: -o-fill-available;
+      width: fill-available;  
+    }
+
+    @media (max-width: $screen-sm) { 
+      padding-left: 0;
     }
   }
 
@@ -55,8 +54,32 @@
 }
 
 
+.sidebar-nav {
+  .dropdown-menu {
+    // margin-top: -10px;
+    padding-top: 0;
+    background-color: inherit;
 
+    a {
+      display: inline-block;
+      padding: 0;
+    }
 
+    li {
+      margin-top: -15px;
+      text-indent: 2px;
+    }
+
+    .delete-collaborator {
+      background-color: transparent;
+    }
+
+    .collaborator-name {
+      text-indent: 0;
+      margin-left: 5px;
+    }
+  }
+}
 
 
 // Move checkboxes over in form

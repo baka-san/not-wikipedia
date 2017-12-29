@@ -12,31 +12,35 @@
       <%= render partial: 'form', locals: { wiki: @wiki} %>
 
       <div class="hidden toggle_me" id="collaborators_section">
-        <div class="col-xs-6 pull-right collaborators-form" id="collaborators_form"> 
-          <h4><strong>Add Collaborators</strong></h4>
+
+        <div class="col-xs-6 hidden-xs collaborators-list" id="collaborators_list">
+          <h4><strong>Currently Collaborating</strong></h4>
+          <% if @wiki.collaborators? %>
+            <% @wiki.collaborators.each do |collaborator| %>
+              <p>
+                <%= link_to wiki_collaboration_path(@wiki, user_id: collaborator.id), 
+                                class: "fa fa-times",
+                                method: :delete,
+                                data: {confirm: 'Are you sure you want to end this collaborator\'s life?'},
+                                remote: true do %>
+                <% end %>
+                <%= link_to collaborator.username, user_path(collaborator) %>
+              </p>
+            <% end %> 
+          <% end %>
+        </div> 
+
+        <div class="col-xs-6 collaborators-form" id="collaborators_form"> 
+          <h4><strong>Add a Collaborator</strong></h4>
           
           <form action="/wikis/<%=@wiki.id%>/collaborations" method="post" data-remote="true">
-            <input id="search_bar" name="email" placeholder="Enter Collaborator's email">
+            <input id="search_bar" name="email" placeholder="Enter email">
             <input type="submit" value="Search">
           </form>
 
           <h3 class="notice" id="notice"><em></em></h3>
-
         </div>
 
-        <% if @wiki.collaborators? %>
-          <div class="col-xs-6 collaborators-list" id="collaborators_list">
-            <h4><strong>Currently Collaborating</strong></h4>
-            <% @wiki.collaborators.each do |collaborator| %>
-              <p><%= link_to collaborator.username, user_path(collaborator), class: ''%></p>
-            <% end %> 
-          </div>  
-
-        <% else %>
-          <div class="col-xs-6 collaborators-list" id="collaborators_list">
-            <h4><strong>Currently Collaborating</strong></h4>
-          </div>  
-        <% end %>
       </div>
 
       <% if @wiki.collaborators? %>
