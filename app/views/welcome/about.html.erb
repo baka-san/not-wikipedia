@@ -5,16 +5,87 @@
 
   <!-- Render error messages -->
   <%= render partial: 'layouts/print_errors' %>
+
+
+  <div class="col-xs-12">
+    <h2>Developed by Grant Backes</h2>
+
+    <a href="mailto:gsbackes@gmail.com" target="_blank" title="Email">
+      <i class="ion fa fa-fw fa-envelope"></i>
+    </a>
+    <a href="https://github.com/baka-san" target="_blank" title="Follow on GitHub">
+      <i class="ion fa fa-fw fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/grant-backes" target="_blank" title="Follow on LinkedIn">
+      <i class="ion fa fa-fw fa-linkedin"></i>
+    </a>
+    <a href="https://bitbucket.org/baka-san" target="_blank" title="Follow on Bitbucket">
+      <i class="ion fa fa-fw fa-bitbucket"></i>
+    </a>
+    <a href="https://stackexchange.com/users/6979844/bakasan" target="_blank" title="Follow on Stack Exchange">
+      <i class="ion fa fa-fw fa-stack-exchange"></i>
+    </a>
+  </div>
  
   <div class="col-xs-12">
-    <h1>This is the about page. H1</h1>
-    <h2>This is the about page. H2</h2>
-    <h3>This is the about page. H3</h3>
-    <h4>This is the about page. H4</h4>
-    <p>This is the about page. P</p>
-    <h5>This is the about page. H5</h5>
-    <h6>This is the about page. H6</h6>
+    <h2 id="features">Features</h2>
+    <ul>
+      <li><p>Anyone can view public wikis by browsing the site.</p></li>
+      <li><p>Users can create, edit, delete, and maintain any public wiki using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown syntax</a>.</p></li>
+      <li><p>Users can pay to upgrade to a premium account, allowing the creation of private wikis. </p></li>
+      <li><p>Premium users can invite other users to collaborate on private wikis they have created.</p></li>
+      <li><p>Premium users can cancel their subscription.</p></li>
+      <li><p>When a user downgrades their account, their private wikis will automatically be made public.</p></li>
+    </ul>
+
+    <h2 id="setupandconfiguration">Setup and Configuration</h2>
+
+    <p><strong>Languages and Frameworks:</strong></p>
+    <ul>
+      <li><p>Ruby 2.4.0</p></li>
+      <li><p>Rails 5.1.4</p></li>
+      <li><p>Bootstrap 3</p></li>
+
+    </ul>
+
+    <p><strong>Databases:</strong></p>
+    <ul>
+      <li><p>SQLite (Test, Development)</p></li>
+      <li><p>PostgreSQL (Production)</p></li>
+    </ul>
+
+    <p><strong>Development Tools and Gems include:</strong></p>
+    <ul>
+      <li><p><a href="https://github.com/plataformatec/devise">Devise</a> for user authentication</p></li>
+      <li><p><a href="https://sendgrid.com/">SendGrid</a> for email confirmation</p></li>
+      <li><p><a href="https://github.com/vmg/redcarpet">Redcarpet</a> for Markdown formatting</p></li>
+      <li><p><a href="https://github.com/evilstreak/markdown-js">Markdown-js</a> for live Markdown formatting</p></li>
+      <li><p><a href="https://github.com/elabs/pundit">Pundit</a> for authorization</p></li>
+      <li><p><a href="https://stripe.com/">Stripe</a> for payments</p></li>
+      <li><p><a href="https://github.com/rspec/rspec-rails">Rsepc</a> and <a href="https://github.com/thoughtbot/factory_bot">FactoryGirl</a> for tests</p></li>
+    </ul>
+
+    <p><strong>Environment and Setup:</strong></p>
+    <ul>
+      <li><p>Figaro was used to set environmental variables and can be found in <small><code>config/application.yml</code></small>. For security reasons, this file has been replaced with an example file <small><code>config/application.example.yml</code></small> on github to demonstrate proper storage of environmental variables.</p></li>
+    </ul>
+
+    <h2 id="torunlocally">To Run Locally</h2>
+    <ul>
+      <li><p><a href="https://help.github.com/articles/cloning-a-repository/" target="_blank">Visit Not Wikipedia's Github</a></p></li>
+
+      <li><p><a href="https://help.github.com/articles/cloning-a-repository/" target="_blank">Clone the repository</a></p></li>
+
+      <li><p>Run <code>bundle install</code> on command line</p></li>
+
+      <li><p>Create and migrate the SQLite database with <code>rake db:create</code> and <code>rake db:migrate</code></p></li>
+
+      <li><p>Start the server using <code>rails server</code></p></li>
+
+      <li><p>Run the app on <code>localhost:3000</code></p></li>
+    </ul>
   </div>
+
 </div>
 
 
