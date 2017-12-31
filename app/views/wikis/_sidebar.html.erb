@@ -16,9 +16,11 @@
     <!-- If index page -->
     <% if @wikis %>
       <li><%= link_to "New Wiki", new_wiki_path%></li>
-      <li><%= link_to "All Wikis", wikis_path%></li>
-      <li><%= link_to "My Wikis", wikis_path(filter: { my_wikis: true })%></li>
-      <li><%= link_to "Collaborating On", wikis_path(filter: { collaborating: true })%></li>
+      <% if current_user %>
+        <li><%= link_to "All Wikis", wikis_path%></li>
+        <li><%= link_to "My Wikis", wikis_path(filter: { my_wikis: true })%></li>
+        <li><%= link_to "Collaborating On", wikis_path(filter: { collaborating: true })%></li>
+      <% end %>
     <% end %>
 
     <!-- Edit/Delete for wiki show -->

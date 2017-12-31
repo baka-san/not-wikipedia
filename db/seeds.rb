@@ -1,29 +1,5 @@
 require 'faker'
 
-# REMEMBER TO DELETE STRIPE TEST DATA AT https://dashboard.stripe.com/account/data
-
-# Create Plans
-plan = Stripe::Plan.create(
-  :amount => 1500,
-  :interval => 'month',
-  :name => 'premium',
-  :currency => 'usd',
-  :id => 'premium'
-)
-
-# Plan.create(name: plan.name, stripe_id: plan.id, display_price: (plan.amount.to_f / 100)) 
-
-# # Create Grant/admin
-# grant = User.new(
-#   username: 'Grant',
-#   email: 'gsbackes@gmail.com', 
-#   password: 'password',
-#   password_confirmation: "password",
-#   role: 'admin'
-# )
-# grant.skip_confirmation!
-# grant.save!
-
 # Create an admin user
 admin = User.new(
   email:    "admin@gmail.com",
@@ -61,115 +37,90 @@ standard_user.save!
 users = User.all
 
 
-#Create Subscriptions
+# REMEMBER TO DELETE STRIPE TEST DATA AT https://dashboard.stripe.com/account/data
+create_stripe_data = false
 
-# # Create Grant/admin subscription
-# token = Stripe::Token.create(
-#   :card => {
-#     :number => "4242424242424242",
-#     :exp_month => 12,
-#     :exp_year => 2050,
-#     :cvc => "123"
-#   },
-# )
+if create_stripe_data
+  # Create Plans
+  plan = Stripe::Plan.create(
+    :amount => 1500,
+    :interval => 'month',
+    :name => 'premium',
+    :currency => 'usd',
+    :id => 'premium'
+  )
 
-# customer = Stripe::Customer.create(
-#   email: grant.email,
-#   description: grant.email,
-#   source: token
-# )
-
-# grant.update(stripe_customer_id: customer.id)
-
-# subscription = Stripe::Subscription.create(
-#   customer: customer.id,
-#   :items => [
-#     {
-#       :plan => "premium"
-#     },
-#   ]
-# )
-
-# # Update ActiveRecord
-# sub = Subscription.create!(
-#   user_id: grant.id, 
-#   stripe_subscription_id: subscription.id,
-#   current_period_start: subscription.current_period_start,
-#   current_period_end: subscription.current_period_end
-# )
-
-# Create admin's subscription
-token = Stripe::Token.create(
-  :card => {
-    :number => "4242424242424242",
-    :exp_month => 12,
-    :exp_year => 2050,
-    :cvc => "123"
-  },
-)
-
-customer = Stripe::Customer.create(
-  email: admin.email,
-  description: admin.email,
-  source: token
-)
-
-admin.update(stripe_customer_id: customer.id)
-
-subscription = Stripe::Subscription.create(
-  customer: customer.id,
-  :items => [
-    {
-      :plan => "premium"
+  # Create admin's subscription
+  token = Stripe::Token.create(
+    :card => {
+      :number => "4242424242424242",
+      :exp_month => 12,
+      :exp_year => 2050,
+      :cvc => "123"
     },
-  ]
-)
+  )
 
-# Update ActiveRecord
-sub = Subscription.create!(
-  user_id: admin.id, 
-  stripe_subscription_id: subscription.id,
-  current_period_start: subscription.current_period_start,
-  current_period_end: subscription.current_period_end
-)
+  customer = Stripe::Customer.create(
+    email: admin.email,
+    description: admin.email,
+    source: token
+  )
+
+  admin.update(stripe_customer_id: customer.id)
+
+  subscription = Stripe::Subscription.create(
+    customer: customer.id,
+    :items => [
+      {
+        :plan => "premium"
+      },
+    ]
+  )
+
+  # Update ActiveRecord
+  sub = Subscription.create!(
+    user_id: admin.id, 
+    stripe_subscription_id: subscription.id,
+    current_period_start: subscription.current_period_start,
+    current_period_end: subscription.current_period_end
+  )
 
 
-# Create premium user's subscription
-token = Stripe::Token.create(
-  :card => {
-    :number => "4242424242424242",
-    :exp_month => 12,
-    :exp_year => 2050,
-    :cvc => "123"
-  },
-)
-
-customer = Stripe::Customer.create(
-  email: premium_user.email,
-  description: premium_user.email,
-  source: token
-)
-
-premium_user.update(stripe_customer_id: customer.id)
-
-subscription = Stripe::Subscription.create(
-  customer: customer.id,
-  :items => [
-    {
-      :plan => "premium"
+  # Create premium user's subscription
+  token = Stripe::Token.create(
+    :card => {
+      :number => "4242424242424242",
+      :exp_month => 12,
+      :exp_year => 2050,
+      :cvc => "123"
     },
-  ]
-)
+  )
 
-# Update ActiveRecord
-sub = Subscription.create!(
-  user_id: premium_user.id, 
-  stripe_subscription_id: subscription.id,
-  current_period_start: subscription.current_period_start,
-  current_period_end: subscription.current_period_end
-)
+  customer = Stripe::Customer.create(
+    email: premium_user.email,
+    description: premium_user.email,
+    source: token
+  )
 
+  premium_user.update(stripe_customer_id: customer.id)
 
+  subscription = Stripe::Subscription.create(
+    customer: customer.id,
+    :items => [
+      {
+        :plan => "premium"
+      },
+    ]
+  )
+
+  # Update ActiveRecord
+  sub = Subscription.create!(
+    user_id: premium_user.id, 
+    stripe_subscription_id: subscription.id,
+    current_period_start: subscription.current_period_start,
+    current_period_end: subscription.current_period_end
+  )
+end
 
 
 #Create Private Wiki Pages
