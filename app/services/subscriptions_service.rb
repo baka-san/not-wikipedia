@@ -13,24 +13,9 @@ class SubscriptionsService
 
   def call_create
     create_subscription(find_customer)
-    # find_subscription
   end
 
   private
-
-    # def find_subscription
-    #   subscription = Subscription.find_by(user_id: @user.id)
-
-    #   if subscription
-    #     retrieve_subscription(subscription.stripe_subscription_id)
-    #   else
-    #     create_subscription(find_customer)
-    #   end
-    # end
-
-    # def retrieve_subscription(id)
-    #   Stripe::Subscription.retrieve(id)
-    # end
 
     def find_customer
       if @user.stripe_customer_id
