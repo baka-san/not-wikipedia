@@ -45,7 +45,7 @@
 
       </div>
 
-      <% if @wiki.collaborators? && authorized_for_this_private_wiki? %>
+      <% if @wiki.collaborators? %>
         <h3 class="toggle_me" id="removal_warning"><strong>Warning: Collaborators will be removed if made public!</strong></h3>
       <% end %>
 

@@ -20,7 +20,7 @@
     <%= f.text_area :body, rows: 8, class: 'form-control', id: 'wiki_body', placeholder: "Describe the wiki" %>
   <% end %>
 
-  <% if current_user.admin? || current_user.premium? %>
+  <% if authorized_for_this_private_wiki?%>
     <div class="form-group">
       <%= f.label :private, class: 'checkbox' do %>
         <%= f.check_box :private %> Private wiki
