@@ -1,23 +1,55 @@
-<li><%= link_to "Not Wikipedia", root_path, class: 'navbar-link'%></li>
-<li><%= link_to "About", welcome_about_path, class: 'navbar-link' %></li>
-<li><%= link_to "Wikis", wikis_path, class: 'navbar-link' %></li>
+<nav class="navbar navbar-fixed-top" role="navigation">
+  <div class="navbar-header navbar-inverse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+  </div> 
+  <div class="navbar-collapse collapse" id="navbar_collapse">
+    <ul class="nav navbar-nav" id="navbar_nav">
 
-<% if current_user %>
-  <li class="sign-out-button">
-    <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
-  </li>
-  <li class="settings-button">
-    <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
-  </li>
-  <li class="profile-button">
-    <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
-  </li>
+      <li><%= link_to "Not Wikipedia", root_path, class: 'navbar-link'%></li>
+      <li><%= link_to "About", welcome_about_path, class: 'navbar-link' %></li>
+      <li><%= link_to "Wikis", wikis_path, class: 'navbar-link' %></li>
 
-<% else %>
-  <li class="sign-up-button">
-    <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
-  </li> 
-  <li class="sign-in-button">
-    <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
-  </li>
-<% end %>  
+      <% if current_user %>
+        <li class="sign-out-button pull-right hidden-xs">
+          <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
+        </li>
+        <li class="settings-button pull-right hidden-xs">
+          <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
+        </li>
+        <li class="profile-button pull-right hidden-xs">
+          <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
+        </li>
+
+        <li class="profile-button visible-xs">
+          <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
+        </li>
+        <li class="settings-button visible-xs">
+          <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
+        </li>
+        <li class="sign-out-button visible-xs">
+          <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
+        </li>
+        
+      <% else %>
+        <li class="sign-up-button pull-right hidden-xs">
+          <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
+        </li> 
+        <li class="sign-in-button pull-right hidden-xs">
+          <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+        </li>
+
+        <li class="sign-in-button visible-xs">
+          <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+        </li>
+        <li class="sign-up-button visible-xs">
+          <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
+        </li> 
+      <% end %>       
+    </ul>
+  </div>    
+</nav>
