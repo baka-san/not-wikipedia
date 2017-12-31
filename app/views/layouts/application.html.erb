@@ -22,53 +22,6 @@
   <body class="preload">
     <div class="container-fluid">
 
-      <!-- NAVBAR -->
-        <ul class="nav nav-tabs navbar-fixed-top">
-          <li><%= link_to "Not Wikipedia", root_path, class: 'navbar-link'%></li>
-          <li><%= link_to "About", welcome_about_path, class: 'navbar-link' %></li>
-          <li><%= link_to "Wikis", wikis_path, class: 'navbar-link' %></li>
-        
-          <% if current_user %>
-            <li class="dropdown pull-right">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon">&#xe055;</span></a>
-              <ul class="dropdown-menu">
-                <li class="">
-                  <%= link_to "Settings", edit_user_registration_path, class: 'navbar-link'%>
-                </li>
-                <li class="">
-                  <%= link_to "Sign Out", destroy_user_session_path, class: 'navbar-link', method: :delete %>
-                </li>
-              </ul>
-            </li>
-              
-            <li class="pull-right">
-              <%= link_to "Profile", user_path(current_user), class: 'navbar-link'%>
-            </li>
-
-          <% else %>
-            <li class="pull-right">
-              <%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %>
-            </li> 
-            <li class="pull-right">
-              <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
-            </li>
-          <% end %> 
-        </ul>
- 
-
-      <!-- PRINT ERRORS -->
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:notice] %>
-        </div>
-      <% elsif flash[:alert] %>
-        <div class="alert alert-warning">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:alert] %>
-        </div>
-      <% end %>
-
       <!-- DISPLAY PAGE -->
       <%= yield %>
 

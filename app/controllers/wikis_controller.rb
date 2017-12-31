@@ -25,7 +25,6 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
-
   end
 
   def create
@@ -39,7 +38,6 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki created."
       redirect_to @wiki
     else
-      flash.now[:alert] = "There was an error creating the wiki. Please try again."
       render :new
     end
   end
@@ -52,11 +50,14 @@ class WikisController < ApplicationController
   end
 
   def update
+    # byebug
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
     authorize @wiki
 
     if @wiki.save
+      # @wiki.collaborations.delete_all unless wiki_params[:private]
+      Collaboration.where(wiki_id: @wiki.id).delete_all unless wiki_params[:private] == "1"
       flash[:notice] = "Page was updated. Jesus will check the validity later."
       redirect_to @wiki
     else

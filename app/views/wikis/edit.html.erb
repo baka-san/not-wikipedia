@@ -5,6 +5,9 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
+    
+    <!-- Render error messages -->
+    <%= render partial: 'layouts/print_errors' %>
 
     <div class="col-xs-12 col-sm-6">
       <h1>Edit Wiki</h1>
@@ -17,11 +20,10 @@
           <h4><strong>Currently Collaborating</strong></h4>
           <% if @wiki.collaborators? %>
             <% @wiki.collaborators.each do |collaborator| %>
-              <p>
+              <p id="collaborator_<%= collaborator.id %>">
                 <%= link_to wiki_collaboration_path(@wiki, user_id: collaborator.id), 
                                 class: "fa fa-times",
                                 method: :delete,
-                                data: {confirm: 'Are you sure you want to end this collaborator\'s life?'},
                                 remote: true do %>
                 <% end %>
                 <%= link_to collaborator.username, user_path(collaborator) %>
@@ -43,8 +45,8 @@
 
       </div>
 
-      <% if @wiki.collaborators? %>
-        <h3 class="hidden toggle_me" id="removal_warning"><strong>Warning: Collaborators will be removed if made public!</strong></h3>
+      <% if @wiki.collaborators? && authorized_for_this_private_wiki? %>
+        <h3 class="toggle_me" id="removal_warning"><strong>Warning: Collaborators will be removed if made public!</strong></h3>
       <% end %>
 
     </div>

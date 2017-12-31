@@ -17,18 +17,18 @@ switch("<%= state %>") {
     notice.text("Collaborator added.");
 
     var collaborator = 
-      "<p>"
-      +  "<a class='fa fa-times delete-collaborator' data-confirm='Are you sure you want to end this collaborator\'s life?'"
-      +     "data-remote='true' rel='nofollow' data-method='delete' href='<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: user.id)) %>'>"
-      +  '</a> <%= link_to user.username, user_url(user) %>'
-      +"</p>";
+      '<p id="collaborator_<%= collaborator.id %>">'
+      +  '<a class="fa fa-times" '
+      +     'data-remote="true" rel="nofollow" data-method="delete" href=\'<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: collaborator.id)) %>\'>'
+      +  '</a> <%= link_to collaborator.username, user_url(collaborator) %>'
+      +'</p>';
 
     var sidebarCollaborator = 
-    "<li>"
-    +  "<a class='fa fa-times delete-collaborator' data-confirm='Are you sure you want to end this collaborator\'s life?'"
-    +     "data-remote='true' rel='nofollow' data-method='delete' href='<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: user.id)) %>'>"
-    +  '</a><%= link_to user.username, user_url(user), class: "collaborator-name" %>'
-    +"</li>";
+      '<li id="sidebar_collaborator_<%= collaborator.id %>">'
+      +  '<a class="fa fa-times delete-collaborator" '
+      +     'data-remote="true" rel="nofollow" data-method="delete" href=\'<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: collaborator.id)) %>\'>'
+      +  '</a><%= link_to collaborator.username, user_url(collaborator), class: "collaborator-name" %>'
+      +'</li>';
 
     collaboratorsList.append(collaborator);
     sidebarCollaboratorsList.append(sidebarCollaborator);
@@ -36,61 +36,8 @@ switch("<%= state %>") {
 
   default:
     notice.text("No user found. Try again.");
-}
+};
 
 // Clear the search bar
-searchBar.text("");
+searchBar.val("");
 
-
-// // Javascript is lame
-// var collaboratorsList = document.getElementById("collaborators_list");
-// var sidebarCollaboratorsList = document.getElementById("sidebar_collaborators_list");
-// var notice = document.getElementById("notice");
-// var searchBar = document.getElementById("search_bar");
-
-// // Clear previous notices
-// notice.innerHTML = "";
-
-// // User is already collaborating
-// <% if user && user.collaborating_on?(wiki) %>
-//   notice.innerHTML = "That user is already collaborating!";
-
-// // User is good to go
-// <% elsif user %>
-//   notice.innerHTML = "Collaborator added.";
-
-//   ""
-
-
-
-//   var newCollaborator = document.createElement("p");
-//   var sidebarCollaborator = document.createElement("li");
-
-//   var anchor1 = document.createElement("a");
-//   var attr1 = document.createAttribute("href");
-//   attr1.value = "<%= url_for(user) %>";
-//   var textNode1 = document.createTextNode("<%= user.username %>");
-
-//   var anchor2 = document.createElement("a");
-//   var attr2 = document.createAttribute("href");
-//   attr2.value = "<%= url_for(user) %>";
-//   var textNode2 = document.createTextNode("<%= user.username %>");
-
-//   anchor1.setAttributeNode(attr1);
-//   anchor1.appendChild(textNode1);
-
-//   anchor2.setAttributeNode(attr2);
-//   anchor2.appendChild(textNode2);
-
-//   newCollaborator.appendChild(anchor1);
-//   collaboratorsList.appendChild(newCollaborator);
-
-//   sidebarCollaborator.appendChild(anchor2);
-//   sidebarCollaboratorsList.appendChild(sidebarCollaborator);
-
-// <% else %>
-//   notice.innerHTML = "No user found. Try again.";
-// <% end %>
-
-// // Clear the search bar
-// searchBar.value = "";

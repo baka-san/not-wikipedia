@@ -5,6 +5,10 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
+
+  <!-- Render error messages -->
+  <%= render partial: 'layouts/print_errors' %>
+
     <div class="col-xs-12 wiki-info">
       <h2 class="wiki-title col-xs-11">
         <stong><%= @wiki.title %></strong>

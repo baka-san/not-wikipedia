@@ -5,6 +5,10 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
+
+    <!-- Render error messages -->
+    <%= render partial: 'layouts/print_errors' %>
+    
     <div class="col-xs-12 col-md-8">
       <h1>Wikis</h1>
       <%= render @index %>

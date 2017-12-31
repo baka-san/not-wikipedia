@@ -16,42 +16,56 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@import "wiki_sidebar.scss";
 @import "variables.scss";
 @import "stripe.scss";
 @import "subscriptions.scss";
 @import "users.scss";
 @import "welcome.scss";
 @import "wikis.scss";
-@import "wiki_sidebar.scss";
 
 // Nasty navbar
-.nav {
-  background-color: white;
+nav {
+  text-align: center;
+  margin-bottom: 0px !important;
+  border-bottom: 1px solid grey !important;
 
-  @media (max-width: $screen-sm) {
-    a {
-      padding-right: 3px !important;
-      padding-left:  3px !important;
+  .navbar-header {
+    border-bottom: 2px solid black !important;
+  }
+
+  .navbar-collapse {
+    padding: 0;
+    border: 0;
+    margin-top: 0;
+  }
+
+  .nav {
+    background-color: white;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    .dropdown-menu {
+      min-width: 120px;
+      // text-align: right;
+    }
+
+    @media (min-width: 768px) {
+      .sign-up-button, .sign-in-button, .profile-button, .settings-button,
+      .sign-out-button, {
+        float: right !important;
+      }
     }
   }
-
-  .dropdown-menu {
-    min-width: 120px;
-    // text-align: right;
-  }
-
 }
 
 body {
   font-size: $base-font-size;
+  margin-bottom: 50px;
 
   // For fixed navbar
-  padding-top: 44px;
-
-  // Stop x scrollbar on wiki sidebar
-  // max-width: 100% !important;
-  // overflow-x: hidden !important;
-
+  // padding-top: 44px;
 }
 
 // h1 { font-size: 2em; }

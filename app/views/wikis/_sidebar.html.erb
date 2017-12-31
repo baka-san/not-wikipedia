@@ -40,18 +40,20 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Collaborators<span class="caret"></span></button></a>
           <ul class="dropdown-menu" id="sidebar_collaborators_list">
             <% wiki.collaborators.each do |collaborator| %>
-              <li><%= link_to wiki_collaboration_path(@wiki, user_id: collaborator.id), 
+              <li id="sidebar_collaborator_<%= collaborator.id %>"><%= link_to wiki_collaboration_path(@wiki, user_id: collaborator.id), 
                                 class: "fa fa-times delete-collaborator",
                                 method: :delete,
-                                data: {confirm: 'Are you sure you want to end this collaborator\'s life?'},
                                 remote: true do %>
-                  <%= link_to collaborator.username, user_path(collaborator), class: "collaborator-name" %>
-                <% end %>
-              </li>
+                <% end %><%= link_to collaborator.username, user_path(collaborator), class: "collaborator-name" %>
+                </li>
             <% end %>   
           </ul>
         </li> 
       <% end %>
     <% end %>
+
+    <li class="divider"></li>
+
+    <%= render partial: 'layouts/navbar' %>
   </ul>
 </div>

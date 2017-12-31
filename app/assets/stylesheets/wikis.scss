@@ -55,11 +55,18 @@
 
 
 .sidebar-nav {
+
+  .divider {
+    background-color: #999999;
+    height: 1px;
+  }
+
   .dropdown-menu {
     // margin-top: -10px;
     padding-top: 0;
+    border: 0;
     background-color: inherit;
-
+    
     a {
       display: inline-block;
       padding: 0;

@@ -1,3 +1,46 @@
-// Place all the styles related to the Stripe controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.subscription-new {
+  margin-top: 30px;
+
+  .description {
+    @media (max-width: $screen-sm) { 
+      h4 {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .credit-card-box {
+    max-width: 400px;
+    
+    .panel-title {
+      font-weight: bold;
+      padding-left: 15px;
+    }
+
+    .payment-errors {
+      font-weight: bold;
+      color: red;
+    }
+
+    form {
+
+      .field, .field > * {
+        display: block !important;
+      }
+
+      #card_number {
+        width: 200px;
+        max-width: 100%;
+      }
+
+      #card_cvc {
+        width: 50px;
+      }
+
+
+
+
+    }
+  }
+
+}

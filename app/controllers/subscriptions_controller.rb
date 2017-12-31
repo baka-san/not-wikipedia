@@ -62,7 +62,7 @@ class SubscriptionsController < ApplicationController
       subscription = current_user.subscription
       subscription.turn_on_autopay
 
-      flash[:notice] = "You're successfully set up to give us more money. Thanks for the cash!\
+      flash.now[:notice] = "You're successfully set up to give us more money. Thanks for the cash!\
                         Your next payment will automatically occur on #{display_date(subscription.current_period_end)}."
       redirect_to current_user
     end
@@ -76,7 +76,7 @@ class SubscriptionsController < ApplicationController
       subscription = current_user.subscription
       subscription.turn_off_autopay
 
-      flash[:notice] = "Your account will be downgraded on #{display_date(subscription.current_period_end)}. Goodbye mere standard user."
+      flash.now[:notice] = "Your account will be downgraded on #{display_date(subscription.current_period_end)}. Goodbye mere standard user."
       redirect_to current_user
     end
   end
