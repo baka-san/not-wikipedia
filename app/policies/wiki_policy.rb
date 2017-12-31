@@ -54,7 +54,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def authorized_for_this_private_wiki?
-    @user && (@user == @wiki.owner || @user.admin? || @wiki.collaborators.include?(@user))
+    @user && (@wiki.owner?(@user) || @user.admin? || @wiki.collaborators.include?(@user))
   end
 
   class Scope < Scope

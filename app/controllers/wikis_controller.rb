@@ -55,9 +55,9 @@ class WikisController < ApplicationController
     @wiki.assign_attributes(wiki_params)
     authorize @wiki
 
+    Collaboration.where(wiki_id: @wiki.id).delete_all unless wiki_params[:private] == "1"
+    
     if @wiki.save
-      # @wiki.collaborations.delete_all unless wiki_params[:private]
-      Collaboration.where(wiki_id: @wiki.id).delete_all unless wiki_params[:private] == "1"
       flash[:notice] = "Page was updated. Jesus will check the validity later."
       redirect_to @wiki
     else

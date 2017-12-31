@@ -47,6 +47,10 @@ class Wiki < ApplicationRecord
     self.user
   end
 
+  def owner?(user)
+    self.user == user
+  end
+
   def collaborators?
     !self.collaborators.empty?
   end

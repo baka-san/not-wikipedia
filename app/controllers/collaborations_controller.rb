@@ -1,10 +1,6 @@
 class CollaborationsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-
-  end
-
   def create
     respond_to do |format|
 
@@ -15,7 +11,9 @@ class CollaborationsController < ApplicationController
         if @collaborator && @collaborator.collaborating_on?(@wiki)
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "exists" }
         elsif @collaborator
-          @collaboration = Collaboration.create(wiki_id: collaboration_params[:wiki_id], user_id: @collaborator.id)
+          @collaboration = Collaboration.new(wiki_id: collaboration_params[:wiki_id], user_id: @collaborator.id)
+          authorize @collaboration
+          @collaboration.save
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "new" }
         else
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "no_user"}
@@ -31,7 +29,8 @@ class CollaborationsController < ApplicationController
         @wiki = Wiki.find(collaboration_destroy_params[:wiki_id])
         @user = User.find(collaboration_destroy_params[:user_id])
         @collaboration = @wiki.collaborations.find_by(user_id: collaboration_destroy_params[:user_id])
-
+        authorize @collaboration
+        
         if @collaboration.destroy
           render :destroy, locals: { user: @user}
         else

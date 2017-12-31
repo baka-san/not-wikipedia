@@ -50,39 +50,6 @@ var ready = function() {
   });
 
 
-  // var listFormTo12 = function() {
-  //   currentlyCollaborating.removeClass("col-xs-12");
-  //   currentlyCollaborating.addClass("col-xs-6");
-  //   collaboratorsForm.removeClass("col-xs-12");
-  //   collaboratorsForm.addClass("col-xs-6");
-  // };
-
-  // var listFormTo6 = function() {
-  //   currentlyCollaborating.removeClass("col-xs-6");
-  //   currentlyCollaborating.addClass("col-xs-12");
-  //   collaboratorsForm.removeClass("col-xs-6");
-  //   collaboratorsForm.addClass("col-xs-12");
-  // };
-
-
-  // // Move the collaborators search bar above currently collaborating for very small screens
-  // var currentlyCollaborating = $("#currently_collaborating");
-  // var collaboratorsForm = $("#collaborators_form");
-
-  // if ($(window).width() < 500) {
-  //   listFormTo6();
-  // }
-
-  // $(window).on('resize', function(){
-  //   if ($(this).width() < 500) {
-  //     listFormTo6();
-  //   }
-  //   else {
-  //     listFormTo12();
-  //   }
-
-  // });
-
 };
 
 
