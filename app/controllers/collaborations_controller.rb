@@ -8,6 +8,10 @@ class CollaborationsController < ApplicationController
         @wiki = Wiki.find(collaboration_params[:wiki_id])
         @collaborator = User.find_by(email: collaboration_params[:email])
 
+        puts "collaborator = #{@collaborator}"
+
+        puts "params = #{params}"
+
         if @collaborator && @collaborator.collaborating_on?(@wiki)
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "exists" }
         elsif @collaborator
@@ -22,6 +26,7 @@ class CollaborationsController < ApplicationController
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "new" }
         else
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "no_user"}
+          puts "collab controller no_user"
         end
       end
     end

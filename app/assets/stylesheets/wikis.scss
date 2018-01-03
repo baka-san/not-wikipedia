@@ -20,35 +20,48 @@
 
 .wiki-edit {
 
+  .edit-col {
+    padding-right: 0px;
+  }
+
   #collaborators_section {
     position: relative;
   }
+
   .collaborators-list {
-    padding-left: 0;
+    padding: 0;
 
     a {
       text-decoration: none;
     }
-
-
-    // Push below collaborators search bar for small screens
-    @media (max-width: 500px) { 
-      // margin-top: 130px;
-    }
   }
 
   .collaborators-form {
-    padding-right: 0;
+    padding: 0;
 
-    #search_bar {
-      width: -webkit-fill-available;
-      width: -moz-fill-available;
-      width: -o-fill-available;
-      width: fill-available;  
+    @media (min-width: $screen-sm) { 
+      padding-left: 10px;
     }
 
-    @media (max-width: $screen-sm) { 
-      padding-left: 0;
+    @media (min-width: $screen-md) { 
+      padding-left: 30px;
+    }
+
+    @media (min-width: $screen-lg) { 
+      padding-left: 50px;
+    }
+
+
+    #search_bar { 
+      max-width: 100%;
+    }
+  }
+
+  .live-preview {
+
+    @media (min-width: $screen-sm) { 
+      padding-right: 0;
+      padding-left: 30px;
     }
   }
 
@@ -59,6 +72,8 @@
 
 
 .sidebar-nav {
+  overflow-x: hidden;
+  max-width: 150px;
 
   .sidebar-brand {
     height: 55px;
@@ -78,7 +93,9 @@
     padding-top: 0;
     border: 0;
     background-color: inherit;
-    
+    min-width: auto;
+    max-width: 150px;
+  
     a {
       display: inline-block;
       padding: 0;
@@ -86,7 +103,7 @@
 
     li {
       margin-top: -15px;
-      text-indent: 2px;
+      text-indent: 3px;
     }
 
     .delete-collaborator {
