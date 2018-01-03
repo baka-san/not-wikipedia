@@ -27,7 +27,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <%= debug(params) %>
+          <%= debug(params) if Rails.env.development? %>
         </div> 
       </div>
 
