@@ -26,10 +26,12 @@ var ready = function() {
   var removalWarning = $("#removal_warning");
   var checkbox = $("#wiki_private");
   var toggleMe = $(".toggle_me");
+  var keepOpen = $("#keep_open");
 
   $(function() {
     if (checkbox.is(':checked')) {
       collaboratorsSection.toggleClass("hidden");
+      keepOpen.toggleClass("hidden");
       removalWarning.addClass("hidden")
     }
   });

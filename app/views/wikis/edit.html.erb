@@ -7,8 +7,10 @@
   <div id="page-content-wrapper">
     
     <!-- Render error messages -->
-    <%= render partial: 'layouts/print_errors' %>
-
+    <div class="col-xs-12">
+      <%= render partial: 'layouts/print_errors' %>
+    </div>
+    
     <div class="col-xs-12 col-sm-6">
       <h1>Edit Wiki</h1>
 
@@ -48,9 +50,7 @@
       <% if @wiki.collaborators? %>
         <h3 class="toggle_me" id="removal_warning"><strong>Warning: Collaborators will be removed if made public!</strong></h3>
       <% end %>
-
     </div>
-
 
     <div class="col-xs-12 col-sm-6">
       <h1>Live Preview</h1>

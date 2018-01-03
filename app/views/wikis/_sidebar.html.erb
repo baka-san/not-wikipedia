@@ -34,8 +34,7 @@
       </li>
       
       <!-- Show collaborators -->
-      <% if wiki.private? %>
-        <li class="dropdown" id="keep_open">
+        <li class="dropdown hidden toggle_me" id="keep_open">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Collaborators<span class="caret"></span></button></a>
           <ul class="dropdown-menu" id="sidebar_collaborators_list">
             <% wiki.collaborators.each do |collaborator| %>
@@ -47,8 +46,7 @@
                 </li>
             <% end %>   
           </ul>
-        </li> 
-      <% end %>
+        </li>  
     <% end %>
 
     <li class="divider"></li>

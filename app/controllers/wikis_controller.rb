@@ -45,12 +45,9 @@ class WikisController < ApplicationController
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-
-    # @collaboration = Collaboration.new
   end
 
   def update
-    # byebug
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
     authorize @wiki

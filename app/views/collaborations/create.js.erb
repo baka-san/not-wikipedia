@@ -8,13 +8,12 @@ var checkbox = $("#wiki_private");
 notice.text("");
 
 // User is already collaborating
-switch("<%= state %>") {
+<% case state 
 
-  case "exists":
+   when "exists" %>
     notice.text("That user is already collaborating!");
-    break
 
-  case "new":
+  <% when "new" %>
     notice.text("Collaborator added.");
 
     var collaborator = 
@@ -33,11 +32,11 @@ switch("<%= state %>") {
 
     collaboratorsList.append(collaborator);
     sidebarCollaboratorsList.append(sidebarCollaborator);
-    break
 
-  default:
+  <% else %>
     notice.text("No user found. Try again.");
-};
+
+<% end %>
 
 // Clear the search bar
 searchBar.val("");
