@@ -7,14 +7,12 @@ class WikiPolicy < ApplicationPolicy
   # Admin = everything
 
   def initialize(user, wiki)
-    # raise Pundit::NotAuthorizedError, "must be logged in" unless user
     @user = user
     @wiki = wiki
   end
 
   def show?
     if @wiki.private?
-      # raise Pundit::NotAuthorizedError, "must be logged in" unless @user
       authorized_for_this_private_wiki?
     else
       true
@@ -29,10 +27,6 @@ class WikiPolicy < ApplicationPolicy
     end
   end 
 
-  # def new?
-  #   create?
-  # end
-
   def update?
     if @wiki.private?
       authorized_for_this_private_wiki?
@@ -40,10 +34,6 @@ class WikiPolicy < ApplicationPolicy
       @user.present?
     end
   end
-
-  # def edit?
-  #   update?
-  # end
 
   def destroy?
     if @wiki.private?
@@ -83,7 +73,6 @@ class WikiPolicy < ApplicationPolicy
         end
 
       else
-        # scope.where(private: false).or(scope.where(user: user))
         all_wikis = scope.all
 
         all_wikis.each do |wiki|
@@ -96,37 +85,5 @@ class WikiPolicy < ApplicationPolicy
       wikis 
     end
   end
-
-  # class CurrentUserScope < Scope
-
-  #   def initialize(user, scope)
-  #     @user = user
-  #     @scope = scope
-  #   end
-
-  #   def resolve
-  #     scope.where(user_id: @user_id)
-  #   end
-  # end
-
-  # class CollaboratingScope < Scope
-    
-  #   def initialize(user, scope)
-  #     @user = user
-  #     @scope = scope
-  #   end
-
-  #   def resolve
-  #     wikis = []
-
-  #     scope.each do |wiki|
-  #       if user.collaborating.include?(wiki)
-  #         wikis << wiki
-  #       end
-  #     end
-
-  #     wikis
-  #   end
-  # end
 
 end
