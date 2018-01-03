@@ -6,7 +6,7 @@ class CollaborationsController < ApplicationController
       format.js do
 
         @wiki = Wiki.find(collaboration_params[:wiki_id])
-        @collaborator = User.find_by(email: 'collaboration_params[:email]')
+        @collaborator = User.find_by_email(collaboration_params[:email])
 
         puts "collaboration_params = #{collaboration_params}"
         puts "collaboration_params[:email] = #{collaboration_params[:email]}"
