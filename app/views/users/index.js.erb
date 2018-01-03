@@ -1,39 +1,46 @@
-// alert("I made it to index.js.erb")
+var collaboratorsList = $("#collaborators_list");
+var sidebarCollaboratorsList = $("#sidebar_collaborators_list");
+var notice = $("#notice");
+var searchBar = $("#search_bar");
 
-// 1) If an email is found when the search button is pushed:
-// Append a div to the form displaying the email of the collaborator to be added WITHOUT reloading page. A user will then see a list of all collaborators they wish to add.
-// Add a hidden form tag to the form containing the user info (user_id) to be handled by controller. When the entire form is submitted, the wiki#create method will take the collaborator user_id's and create both a new wiki and the associated collaborations.
-// Clear out collaboratorsSearchBar so it can be used to search for another user.
-// Clear out any previous error messages (i.e. "No user found").
 
-// 2) If no email is found when the search bar is pushed:
-// Display a "no user found" error.
-// Clear out collaboratorsSearchBar so it can be used to search for another user.
-
-var form = document.getElementById("collaborators_form")
-var collaboratorList = document.getElementById("collaborator_list")
-var notice = document.getElementById("notice")
-var searchBar = document.getElementById("search_bar")
-var users = []
-
+<% byebug %>
 // Clear previous notices
-notice.innerHTML = ""
+notice.text("");
 
-<% if user && !users.include?(user) %>
-  <% users < user %>
-  notice.innerHTML = "Collaborator added."
+// No user in ActiveRecord
+<% if collaborator %>
 
-  var newCollaborator = document.createElement("p")
-  newCollaborator.innerHTML = "<%= user.email %>"
-  
-  collaboratorList.appendChild(newCollaborator)
+  // Collaborator has already been added
+  if ($("#collaborator_<%= collaborator.id %>").length) {
+    notice.text("That user is already collaborating!");
+  }
+  // Collaborator hasn't been added
+  else {
+    notice.text("Collaborator added.");
 
+    var collaborator = 
+      '<p id="collaborator_<%= collaborator.id %>">'
+      +  '<a class="fa fa-times" '
+      +     'data-remote="true" rel="nofollow" data-method="delete" href=\'<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: collaborator.id)) %>\'>'
+      +  '</a> <%= link_to collaborator.username, user_url(collaborator) %>'
+      +'</p>';
+
+    var sidebarCollaborator = 
+      '<li id="sidebar_collaborator_<%= collaborator.id %>">'
+      +  '<a class="fa fa-times delete-collaborator" '
+      +     'data-remote="true" rel="nofollow" data-method="delete" href=\'<%= url_for(wiki_collaboration_path(id: wiki.id, user_id: collaborator.id)) %>\'>'
+      +  '</a><%= link_to collaborator.username, user_url(collaborator), class: "collaborator-name" %>'
+      +'</li>';
+
+    collaboratorsList.append(collaborator);
+    sidebarCollaboratorsList.append(sidebarCollaborator);
+  }
+
+// User found in ActiveRecord
 <% else %>
-  notice.innerHTML = "No user found. Try again."
-
+  notice.text("No user found. Try again.");
 <% end %>
 
-
 // Clear the search bar
-searchBar.value = ""
-
+searchBar.val("");

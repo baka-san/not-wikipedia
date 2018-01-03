@@ -35,7 +35,7 @@
         <div class="col-xs-6 collaborators-form" id="collaborators_form"> 
           <h4><strong>Add a Collaborator</strong></h4>
           
-          <form action="/wikis/<%=@wiki.id%>/collaborations" method="post" data-remote="true">
+          <form action="/users" method="GET" data-remote="true">
             <input id="search_bar" name="email" placeholder="Enter email">
             <input type="submit" value="Search">
           </form>
@@ -50,7 +50,6 @@
       <% end %>
 
     </div>
-
 
     <div class="col-xs-12 col-sm-6">
       <h1>Live Preview</h1>

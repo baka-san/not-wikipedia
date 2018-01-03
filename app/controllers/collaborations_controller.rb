@@ -2,6 +2,7 @@ class CollaborationsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+
     respond_to do |format|
 
       format.js do
@@ -12,7 +13,7 @@ class CollaborationsController < ApplicationController
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "exists" }
         elsif @collaborator
           @collaboration = Collaboration.new(wiki_id: collaboration_params[:wiki_id], user_id: @collaborator.id)
-          authorize @collaboration
+          # authorize @collaboration
           @collaboration.save
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "new" }
         else
@@ -29,7 +30,7 @@ class CollaborationsController < ApplicationController
         @wiki = Wiki.find(collaboration_destroy_params[:wiki_id])
         @user = User.find(collaboration_destroy_params[:user_id])
         @collaboration = @wiki.collaborations.find_by(user_id: collaboration_destroy_params[:user_id])
-        authorize @collaboration
+        # authorize @collaboration
         
         if @collaboration.destroy
           render :destroy, locals: { user: @user}

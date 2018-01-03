@@ -21,12 +21,11 @@
   <% end %>
 
   <% if authorized_for_this_private_wiki?%>
-    <div class="form-group">
+    <%= form_group_tag(wiki.errors[:private]) do %>
       <%= f.label :private, class: 'checkbox' do %>
         <%= f.check_box :private %> Private wiki
       <% end %>
-    </div>
-
+    <% end %>
 
   <% else %>
     <p><%= link_to  "Go Premium", 
@@ -37,7 +36,14 @@
     </p>
   <% end %>
   
-  <div class="form-group">
+  <%= f.fields_for :collaboration, id: "collaborators_submission" do |f2| %>
+    <div class="form-group" id="collaborator_1">
+      <%= f2.hidden_field :wiki_id %>
+      <%= f2.hidden_field :user_id %>
+    </div>
+  <% end %>
+  
+  <div class="form-group pull-right">
     <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
   
