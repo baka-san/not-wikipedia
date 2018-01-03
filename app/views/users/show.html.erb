@@ -8,7 +8,7 @@
   
   <div class="col-xs-12">
     <h2><%= @user.username %>'s Profile</h2>
-    <p>Member since: <%= distance_of_time_in_words_to_now(@user.confirmed_at) %></p>
+    <p>Member since: <%= distance_of_time_in_words_to_now(@user.confirmed_at) %> ago</p>
     <p>Membership: <%= @user.role %></p>
   </div>
 

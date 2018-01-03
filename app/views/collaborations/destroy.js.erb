@@ -1,3 +1,7 @@
+var notice = $("#notice");
+notice.text("Collaborator removed.");
+
+
 $("#collaborator_<%= user.id %>").remove();
 $("#sidebar_collaborator_<%= user.id %>").remove();
 

@@ -27,7 +27,6 @@ The source code is available at GitHub: https://github.com/baka-san/not-wikipedi
 **Development Tools and Gems include**:
 
 - [Devise](https://github.com/plataformatec/devise) for user authentication
-- [SendGrid](https://sendgrid.com/) for email confirmation
 - [Redcarpet](https://github.com/vmg/redcarpet) for Markdown formatting
 - [Markdown-js](https://github.com/evilstreak/markdown-js) for live Markdown formatting
 - [Pundit](https://github.com/elabs/pundit) for authorization
