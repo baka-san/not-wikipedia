@@ -4,14 +4,13 @@ class CollaborationsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        byebug
-
+        
         @wiki = Wiki.find(collaboration_params[:wiki_id])
-        @collaborator = User.where(email: collaboration_params[:email]).first
+        @collaborator = User.find_by(email: collaboration_params[:email])
 
         puts "collaboration_params = #{collaboration_params}"
         puts "collaboration_params[:email] = #{collaboration_params[:email]}"
-        puts "User.find_by(email: collaboration_params[:email]).first.email = #{User.find_by(email: collaboration_params[:email]).first.email}"
+        puts "User.find_by(email: collaboration_params[:email]) = #{User.find_by(email: collaboration_params[:email])}"
         puts "collaborator = #{@collaborator}"
 
         puts "params = #{params}"
