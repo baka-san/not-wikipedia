@@ -1,9 +1,6 @@
 require 'stripe'
 
 class SubscriptionsService
-  # PLAN = Plan.find_by_name('premium')
-
-  # DEFAULT_CURRENCY = 'usd'
 
   def initialize(params, user)
     @user = user
@@ -61,8 +58,6 @@ class SubscriptionsService
         current_period_start: subscription.current_period_start,
         current_period_end: subscription.current_period_end
       )
-
       subscription
     end
-
 end

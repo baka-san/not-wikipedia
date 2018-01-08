@@ -2,19 +2,21 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-
     @wikis = policy_scope(Wiki)
 
     if params[:filter].present?
       if filter_params[:my_wikis]
         @index = current_user.wikis 
+        @title = "My Wikis"
       elsif filter_params[:collaborating]
         @index = current_user.collaborating 
+        @title = "Collaborating On"
       end
 
       @message = @index.empty? ? "None found." : nil 
     else
       @index = @wikis 
+      @title = "Wikis"
     end
   end
 
@@ -52,6 +54,7 @@ class WikisController < ApplicationController
     @wiki.assign_attributes(wiki_params)
     authorize @wiki
 
+    # If wiki made public, delete all collaborators
     Collaboration.where(wiki_id: @wiki.id).delete_all unless wiki_params[:private] == "1"
     
     if @wiki.save

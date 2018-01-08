@@ -1,6 +1,7 @@
 $(function() {
   var $form = $('#new_subscription');
   $form.submit(function(event) {
+
     // Disable the submit button to prevent repeated clicks:
     $form.find('.submit').prop('disabled', true);
 

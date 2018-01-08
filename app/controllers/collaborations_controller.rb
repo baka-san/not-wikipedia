@@ -15,8 +15,11 @@ class CollaborationsController < ApplicationController
 
         puts "params = #{params}"
 
+        # Collaborator exists
         if @collaborator && @collaborator.collaborating_on?(@wiki)
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "exists" }
+
+        # New collaborator
         elsif @collaborator
           @collaboration = Collaboration.new(wiki_id: collaboration_params[:wiki_id], user_id: @collaborator.id)
           authorize @collaboration
@@ -25,11 +28,11 @@ class CollaborationsController < ApplicationController
           # Make sure wiki is private
           @wiki.private = true
           @wiki.save
-
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "new" }
+
+        # No such user
         else
           render :create, locals: { collaborator: @collaborator, wiki: @wiki, state: "no_user"}
-          puts "collab controller no_user"
         end
       end
     end

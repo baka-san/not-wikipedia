@@ -6,7 +6,6 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = "You're already a premium member you silly goose!"
       redirect_to current_user
     else
-      # @plan = Stripe::Plan.retrieve(id: 'premium')
       @subscription = Subscription.new
     end
   end
@@ -37,21 +36,6 @@ class SubscriptionsController < ApplicationController
         redirect_to new_subscription_path
       end
     end
-  end
-
-  def update
-    # should this be update or destroy
-    # cancel_at_period_end = true # then it will wait till the end. delete from db in webhook
-    # add a column to subscriptions for reoccuring pay true or false
-
-    # If the user already has an active subscription, don't allow them to subscribe again.
-    if current_user.standard?
-      flash[:alert] = "Hey, you need to upgrade to do that buddy!"
-      redirect_to current_user
-    else
-    # current_user.subscription.downgrade
-    end
-
   end
 
   def turn_on_autopay
