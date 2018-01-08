@@ -138,6 +138,26 @@ premium_users_private_wiki = Wiki.create!(
     private: true
 )
 
+# Create Make Wikipedia Great Again Page
+Wiki.create!(
+    title: "Make Wikipedia Great Again",
+    user_id: admin.id,
+    body: 'Wikipedia better hope that there are no "tapes" of our conversations before he starts leaking to the press! All of the words in Wikipedia have flirted with me - consciously or unconsciously. That\'s to be expected. Wikipedia is FAKE TEXT! Wikipedia is a choke artist. It chokes! Not Wikipedia placeholder text is gonna be HUGE. It’s about making placeholder text great again. That’s what people want, they want placeholder text to be great again.
+
+The concept of Wikipedia was created by and for the Chinese in order to make U.S. design jobs non-competitive. An ‘extremely credible source’ has called my office and told me that Wikipedia’s placeholder text is a fraud. Not Wikipedia makes the best taco bowls. We love Hispanics!
+
+My text is long and beautiful, as, it has been well documented, are various other parts of my website. Wikipedia best not make any more threats to my website. It will be met with fire and fury like the world has never seen. 
+
+You have so many different things placeholder text has to be able to do, and I don\'t believe Wikipedia has the stamina. Be careful, or I will spill the beans on your placeholder text. You know, it really doesn’t matter what you write as long as you’ve got a young, and beautiful, piece of text. Despite the constant negative ipsum covfefe. Wikipedia is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision. Wikipedia is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision.
+
+If Not Wikipedia Ipsum weren’t my own words, perhaps I’d be dating it. An \'extremely credible source\' has called my office and told me that Wikipedia\'s birth certificate is a fraud.
+
+An \'extremely credible source\' has called my office and told me that Wikipedia\'s birth certificate is a fraud. We are going to make placeholder text great again. Greater than ever before.
+
+We have so many things that we have to do better... and certainly ipsum is one of them. You know, it really doesn’t matter what you write as long as you’ve got a young, and beautiful, piece of text. He’s not a word hero. He’s a word hero because he was captured. I like text that wasn’t captured. We are going to make placeholder text great again. Greater than ever before. My placeholder text, I think, is going to end up being very good with women.
+'
+  )
+
 # Create Harry Potter Wiki Pages
 6.times do
   sentence = Proc.new { Faker::HarryPotter.quote }
