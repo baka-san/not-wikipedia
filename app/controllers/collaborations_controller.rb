@@ -5,15 +5,9 @@ class CollaborationsController < ApplicationController
     respond_to do |format|
       format.js do
         
+        @email = collaboration_params[:email].downcase!
         @wiki = Wiki.find(collaboration_params[:wiki_id])
-        @collaborator = User.find_by(email: collaboration_params[:email])
-
-        puts "collaboration_params = #{collaboration_params}"
-        puts "collaboration_params[:email] = #{collaboration_params[:email]}"
-        puts "User.find_by(email: collaboration_params[:email]) = #{User.find_by(email: collaboration_params[:email])}"
-        puts "collaborator = #{@collaborator}"
-
-        puts "params = #{params}"
+        @collaborator = User.find_by(email: @email)
 
         # Collaborator exists
         if @collaborator && @collaborator.collaborating_on?(@wiki)
