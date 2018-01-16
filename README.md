@@ -2,9 +2,8 @@
 
 Like Wikipedia, Not Wikipedia is a user-maintained encyclopedia. Anyone can view the information on the site, however, to get involved with creating and maintaining wikis, a user needs to create a free account. From there, a user can upgrade to a paid membership, allowing the creation of private wikis, which can be shared with individuals the user wishes to collaborate with.
 
-The app is deployed on Heroku: https://not-wikipedia-heroku.herokuapp.com/
 
-The source code is available at GitHub: https://github.com/baka-san/not-wikipedia
+### [Bomb Blog Post](https://baka-san.github.io/portfolio/not-reddit/) / [Live Site](https://not-reddit-heroku.herokuapp.com/)
 
 # Features
 - Anyone can view public wikis by browsing the site.
@@ -14,7 +13,7 @@ The source code is available at GitHub: https://github.com/baka-san/not-wikipedi
 - Premium users can cancel their subscription.
 - When a user downgrades their account, their private wikis will automatically be made public.
 
-# Setup and Configuration
+# Configuration
 
 **Languages and Frameworks**: Ruby on Rails and Bootstrap
 
@@ -37,7 +36,7 @@ The source code is available at GitHub: https://github.com/baka-san/not-wikipedi
 
 - Environment variables were set using Figaro and are stored in `config/application.yml` (ignored by git). `config/application.example.yml` demonstrates how to store environment variables.
 
-**To run Not Wikipedia locally:**
+**To run locally:**
 
 - [Clone the repository](https://help.github.com/articles/cloning-a-repository/)
 - Run `bundle install` on command line
