@@ -4,8 +4,8 @@ class CollaborationsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        
-        @email = collaboration_params[:email].downcase!
+      
+        @email = collaboration_params[:email].downcase
         @wiki = Wiki.find(collaboration_params[:wiki_id])
         @collaborator = User.find_by(email: @email)
 
@@ -15,7 +15,7 @@ class CollaborationsController < ApplicationController
 
         # New collaborator
         elsif @collaborator
-          @collaboration = Collaboration.new(wiki_id: collaboration_params[:wiki_id], user_id: @collaborator.id)
+          @collaboration = Collaboration.new(wiki_id: @wiki.id, user_id: @collaborator.id)
           authorize @collaboration
           @collaboration.save
 

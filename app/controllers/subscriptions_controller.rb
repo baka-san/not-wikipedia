@@ -17,9 +17,10 @@ class SubscriptionsController < ApplicationController
       redirect_to current_user
     else
       begin 
-      # Create a subscription in the database and in Stripe
+      # Create a subscription in Stripe
       SubscriptionsService.new(subscriptions_params, current_user).call_create
 
+      # Create user in ActiveRecord
       current_user.upgrade_to_premium
 
       if current_user.save 
